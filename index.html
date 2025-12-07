@@ -17,6 +17,119 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+
+      <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <!-- Background Grid -->
+      <div class="loading-grid"></div>
+      
+      <!-- Code Rain Effect -->
+      <div class="code-rain" id="codeRain"></div>
+      
+      <!-- Main Content -->
+      <div class="loading-content">
+        <!-- Terminal Window -->
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-btn close"></span>
+              <span class="terminal-btn minimize"></span>
+              <span class="terminal-btn maximize"></span>
+            </div>
+            <div class="terminal-title">portfolio@dimas:~</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-command" id="terminalCommand"></span>
+              <span class="terminal-cursor"></span>
+            </div>
+            <div class="terminal-output" id="terminalOutput"></div>
+          </div>
+        </div>
+
+        <!-- Loading Logo -->
+        <div class="loading-logo">
+          <div class="logo-circle"></div>
+          <div class="logo-inner">
+            <i class="bi bi-code-slash"></i>
+          </div>
+          <svg class="logo-spinner" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45"></circle>
+          </svg>
+        </div>
+
+        <!-- Loading Info -->
+        <div class="loading-info">
+          <h2 class="loading-title">
+            <span class="glitch" data-text="INITIALIZING">INITIALIZING</span>
+          </h2>
+          <div class="loading-stats">
+            <div class="stat-item">
+              <i class="bi bi-file-code"></i>
+              <span id="filesLoaded">0</span>
+              <span class="stat-label">files</span>
+            </div>
+            <div class="stat-item">
+              <i class="bi bi-folder"></i>
+              <span id="modulesLoaded">0</span>
+              <span class="stat-label">modules</span>
+            </div>
+            <div class="stat-item">
+              <i class="bi bi-cpu"></i>
+              <span id="cpuUsage">0</span>
+              <span class="stat-label">% CPU</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-bar-container">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="loadingProgress"></div>
+              <div class="progress-bar-glow"></div>
+            </div>
+            <div class="progress-percentage" id="loadingPercentage">0%</div>
+          </div>
+          <div class="loading-status" id="loadingStatus">Initializing systems...</div>
+        </div>
+
+        <!-- Tech Stack Icons -->
+        <div class="tech-stack-loading">
+          <div class="tech-icon" style="animation-delay: 0s">
+            <i class="bi bi-filetype-html"></i>
+          </div>
+          <div class="tech-icon" style="animation-delay: 0.1s">
+            <i class="bi bi-filetype-css"></i>
+          </div>
+          <div class="tech-icon" style="animation-delay: 0.2s">
+            <i class="bi bi-filetype-js"></i>
+          </div>
+          <div class="tech-icon" style="animation-delay: 0.3s">
+            <i class="bi bi-git"></i>
+          </div>
+          <div class="tech-icon" style="animation-delay: 0.4s">
+            <i class="bi bi-github"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Particles -->
+      <div class="loading-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+    </div>
+    
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
       <div class="nav-container">
@@ -68,7 +181,7 @@
         <div class="hero-image">
           <div class="image-container">
             <div class="profile-image">
-              <img src="img.jpg" alt="Dimas Profile" />
+              <img src="assets/profile/img.jpg" alt="Dimas Profile" />
             </div>
             <div class="floating-badge badge-1">
               <i class="bi bi-code-slash" style="color: var(--accent-blue)"></i>
@@ -96,12 +209,90 @@
       </div>
     </section>
 
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span class="marquee-item">WEB DESIGN</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">BACKEND DEVELOPER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">TECH ENTHUSIAST</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">FULL STACK WEB DEVELOPER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">IT ENTHUSIAST</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">PROBLEM SOLVER</span>
+                <span class="marquee-separator">✦</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-content">
+                <span class="marquee-item">FULL STACK WEB DEVELOPER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">BACKEND DEVELOPER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">TECH ENTHUSIAST</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">WEB DESIGN</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">IT ENTHUSIAST</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">PROBLEM SOLVER</span>
+                <span class="marquee-separator">✦</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reverse Marquee -->
+    <section class="marquee-section marquee-reverse">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span class="marquee-item">NODE.JS</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">GOLANG</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">REACTJS</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">LARAVEL</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">CODEIGNITER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">PYTHON</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">C++</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">GIT</span>
+                <span class="marquee-separator">✦</span>
+            </div>
+            <div class="marquee-content">
+                <span class="marquee-item">NODE.JS</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">GOLANG</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">REACTJS</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">LARAVEL</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">CODEIGNITER</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">PYTHON</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">C++</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">GIT</span>
+                <span class="marquee-separator">✦</span>
+            </div>
+        </div>
+    </section>
+
+
     <!-- About Section -->
     <section class="about" id="about">
       <div class="about-container">
         <div class="about-image-wrapper">
           <div class="about-image">
-            <img src="img.jpg" alt="About Dimas" />
+            <img src="assets/profile/img.jpg" alt="About Dimas" />
           </div>
         </div>
         <div class="about-content">
@@ -127,554 +318,167 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
+   <!-- Skills Section -->
     <section class="skills" id="skills">
       <div class="skills-container">
         <h2 class="section-title" style="text-align: center">My Skills</h2>
-        <div class="skills-grid">
-          <!-- HTML Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-html">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                alt="HTML5"
-                class="skill-icon"
-              />
-              <h4>HTML5</h4>
+        <p class="skills-subtitle">Technologies and tools I work with</p>
+        
+        <div class="skills-categories">
+          <!-- Frontend -->
+          <div class="skill-category">
+            <h3 class="category-title">Frontend Development</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">HTML5</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">CSS3</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">JavaScript</h4>
+              </div>
+
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">ReactJS</h4>
+              </div>
+
+              
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Bootstrap</h4>
+              </div>
             </div>
           </div>
+          
+          <!-- Backend -->
+          <div class="skill-category">
+            <h3 class="category-title">Backend Development</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">PHP</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Node.js</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Laravel</h4>
+              </div>
 
-          <!-- CSS Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-css">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                alt="CSS3"
-                class="skill-icon"
-              />
-              <h4>CSS3</h4>
+               <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Golang" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Golang</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg" alt="CodeIgniter" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">CodeIgniter</h4>
+              </div>
             </div>
           </div>
-
-          <!-- JavaScript Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-js">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                alt="JavaScript"
-                class="skill-icon"
-              />
-              <h4>JavaScript</h4>
+          
+          <!-- Database & Others -->
+          <div class="skill-category">
+            <h3 class="category-title">Database & Programming</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">MySQL</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Python</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">C</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">C++</h4>
+              </div>
             </div>
           </div>
+          
+          <!-- Tools -->
+          <div class="skill-category">
+            <h3 class="category-title">Tools & Version Control</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Git</h4>
+              </div>
+              
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">GitHub</h4>
+              </div>
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Visual Studio Code</h4>
+              </div>
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="Postman" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">Postman</h4>
+              </div>
+              <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                  <img src="https://cdn.simpleicons.org/xampp/F37623" alt="XAMPP" class="skill-icon" />
+                </div>
+                <h4 class="skill-name">XAMPP</h4>
+              </div>
 
-          <!-- PHP Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-php">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                alt="PHP"
-                class="skill-icon"
-              />
-              <h4>PHP</h4>
-            </div>
-          </div>
-
-          <!-- MySQL Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-mysql">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                alt="MySQL"
-                class="skill-icon"
-              />
-              <h4>MySQL</h4>
-            </div>
-          </div>
-
-          <!-- Bootstrap Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-bootstrap">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
-                alt="Bootstrap"
-                class="skill-icon"
-              />
-              <h4>Bootstrap</h4>
-            </div>
-          </div>
-
-          <!-- Node.js Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-node">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                alt="Node.js"
-                class="skill-icon"
-              />
-              <h4>Node.js</h4>
-            </div>
-          </div>
-
-          <!-- Python Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-python">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                alt="Python"
-                class="skill-icon"
-              />
-              <h4>Python</h4>
-            </div>
-          </div>
-
-          <!-- C++ Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-cpp">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-                alt="C++"
-                class="skill-icon"
-              />
-              <h4>C++</h4>
-            </div>
-          </div>
-
-          <!-- C Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-c">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
-                alt="C"
-                class="skill-icon"
-              />
-              <h4>C</h4>
-            </div>
-          </div>
-
-          <!-- Git Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-git">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                alt="Git"
-                class="skill-icon"
-              />
-              <h4>Git</h4>
-            </div>
-          </div>
-
-          <!-- GitHub Card -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-github">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                alt="GitHub"
-                class="skill-icon"
-              />
-              <h4>GitHub</h4>
-            </div>
-          </div>
-
-          <!-- Laravel Card (BARU) -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-laravel">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
-                alt="Laravel"
-                class="skill-icon"
-              />
-              <h4>Laravel</h4>
-            </div>
-          </div>
-
-          <!-- CodeIgniter Card (BARU) -->
-          <div class="skill-card-wrapper">
-            <div class="skill-canvas">
-              <div class="tr-1"></div>
-              <div class="tr-2"></div>
-              <div class="tr-3"></div>
-              <div class="tr-4"></div>
-              <div class="tr-5"></div>
-              <div class="tr-6"></div>
-              <div class="tr-7"></div>
-              <div class="tr-8"></div>
-              <div class="tr-9"></div>
-              <div class="tr-10"></div>
-              <div class="tr-11"></div>
-              <div class="tr-12"></div>
-              <div class="tr-13"></div>
-              <div class="tr-14"></div>
-              <div class="tr-15"></div>
-              <div class="tr-16"></div>
-              <div class="tr-17"></div>
-              <div class="tr-18"></div>
-              <div class="tr-19"></div>
-              <div class="tr-20"></div>
-              <div class="tr-21"></div>
-              <div class="tr-22"></div>
-              <div class="tr-23"></div>
-              <div class="tr-24"></div>
-              <div class="tr-25"></div>
-            </div>
-            <div class="skill-card skill-codeigniter">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg"
-                alt="CodeIgniter"
-                class="skill-icon"
-              />
-              <h4>CodeIgniter</h4>
             </div>
           </div>
         </div>
@@ -688,10 +492,40 @@
           Featured Projects
         </h2>
         <div class="projects-grid">
-          <div class="project-card">
+         <div class="project-card">
             <div class="project-image">
               <img
-                src="https://picsum.photos/900/400?random=10"
+                src="assets/project/pr1.png"
+                alt="Dokumen Pengajuan Warga Digital"
+              />
+            </div>
+            <div class="project-content">
+              <h3>Dokumen Pengajuan Warga Digital</h3>
+              <p>
+                Aplikasi ini dirancang untuk memudahkan warga dalam mengajukan berbagai dokumen administrasi secara online,
+                mengurangi kebutuhan untuk kunjungan fisik ke kantor seperti pemerintahan.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">JAVASCRIPT</span>
+                <span class="tech-badge">BOOTSTRAP</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">MYSQL</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="btn btn-primary">
+                  <i class="bi bi-box-arrow-up-right"></i> Live Demo
+                </a>
+                <a href="#" class="btn btn-secondary">
+                  <i class="bi bi-github"></i> Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+         <div class="project-card">
+            <div class="project-image">
+              <img
+                src="assets/project/pr3.png"
                 alt="E-Commerce Platform"
               />
             </div>
@@ -699,10 +533,16 @@
               <h3>E-Commerce Platform</h3>
               <p>
                 Platform e-commerce modern dengan fitur lengkap seperti payment
-                gateway, real-time inventory management, dan user
-                authentication. Dibangun menggunakan React.js, Node.js, dan
-                MongoDB.
+                gateway, real-time inventory management, user
+                authentication, pemesanan produk, dan ulasan pelanggan.
               </p>
+              <div class="tech-stack">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">JAVASCRIPT</span>
+                <span class="tech-badge">BOOTSTRAP</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">MYSQL</span>
+              </div>
               <div class="project-links">
                 <a href="#" class="btn btn-primary">
                   <i class="bi bi-box-arrow-up-right"></i> Live Demo
@@ -716,41 +556,24 @@
           <div class="project-card">
             <div class="project-image">
               <img
-                src="https://picsum.photos/900/400?random=11"
-                alt="Task Management App"
+                src="assets/project/pr2.png"
+                alt="Futsal Booking"
               />
             </div>
             <div class="project-content">
-              <h3>Task Management App</h3>
+              <h3>Futsal Booking</h3>
               <p>
-                Aplikasi manajemen tugas kolaboratif dengan fitur drag-and-drop,
-                real-time updates, dan team collaboration. Menggunakan React.js,
-                Express.js, dan Socket.io untuk real-time functionality.
+                Aplikasi pemesanan lapangan futsal online yang memudahkan
+                pengguna untuk mencari, memesan, dan membayar terintegrasi payment gateway lapangan futsal
+                secara real-time. 
               </p>
-              <div class="project-links">
-                <a href="#" class="btn btn-primary">
-                  <i class="bi bi-box-arrow-up-right"></i> Live Demo
-                </a>
-                <a href="#" class="btn btn-secondary">
-                  <i class="bi bi-github"></i> Source Code
-                </a>
+              <div class="tech-stack">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">JAVASCRIPT</span>
+                <span class="tech-badge">BOOTSTRAP</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">MYSQL</span>
               </div>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-image">
-              <img
-                src="https://picsum.photos/900/400?random=12"
-                alt="Social Media Dashboard"
-              />
-            </div>
-            <div class="project-content">
-              <h3>Social Media Dashboard</h3>
-              <p>
-                Dashboard analytics untuk social media dengan visualisasi data
-                interaktif, automated reporting, dan multi-platform integration.
-                Built with React.js, Chart.js, dan REST APIs.
-              </p>
               <div class="project-links">
                 <a href="#" class="btn btn-primary">
                   <i class="bi bi-box-arrow-up-right"></i> Live Demo
@@ -765,214 +588,31 @@
       </div>
     </section>
 
-    <!-- Certificates Section -->
-    <section class="certificates" id="certificates">
-      <div class="certificates-container">
-        <h2 class="section-title" style="text-align: center">Certificates</h2>
-        <div class="certificates-wrapper">
-          <div class="certificate-card cert-1" onclick="openModal('cer1.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer1.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Belajar Dasar Pemrograman JavaScript
-                <span class="cert-subtitle">Dicoding - 2024</span>
-              </div>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer1.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="certificate-card cert-2" onclick="openModal('cer2.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer2.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">Memulai Pemrograman Dengan Python</div>
-              <span class="cert-subtitle">Dicoding - 2024</span>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="cer2.jpg"
-                    onclick="event.stopPropagation(); openModal('cer2.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="certificate-card cert-3" onclick="openModal('cer3.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer3.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">Memulai Pemrograman C</div>
-              <span class="cert-subtitle">Dicoding - 2025</span>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer3.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="certificate-card cert-4" onclick="openModal('cer4.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer4.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Belajar Prinsip Pemrograman Solid
-                <span class="cert-subtitle">Dicoding - 2025</span>
-              </div>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer4.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="certificate-card cert-5" onclick="openModal('cer5.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer5.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Cloud Practitioner Essentials (Belajar Dasar AWS Cloud)
-                <span class="cert-subtitle">Dicoding - 2024</span>
-              </div>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer5.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="certificate-card cert-6" onclick="openModal('cer6.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer6.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Belajar Back-End Pemula dengan JavaScript
-              </div>
-              <span class="cert-subtitle">Dicoding - 2022</span>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer6.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="certificate-card cert-7" onclick="openModal('cer7.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer7.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Belajar Dasar Manajemen Projek
-                <span class="cert-subtitle">Dicoding - 2025</span>
-              </div>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer7.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="certificate-card cert-8" onclick="openModal('cer8.jpg')">
-            <span class="certificate-inner"></span>
-            <img src="cer8.jpg" alt="Certificate" />
-            <div class="certificate-content">
-              <div class="cert-title">
-                Belajar Dasar AI
-                <span class="cert-subtitle">Dicoding - 2025</span>
-              </div>
-              <ul class="cert-links">
-                <li>
-                  <a
-                    href="#"
-                    onclick="event.stopPropagation(); openModal('cer8.jpg')"
-                    title="View"
-                    ><i class="bi bi-eye"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" onclick="event.stopPropagation()" title="Verify"
-                    ><i class="bi bi-patch-check"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+  <!-- Certificates Section -->
+  <section class="certificates" id="certificates">
+    <div class="certificates-container">
+      <h2 class="section-title" style="text-align: center">Certificates</h2>
+    <div class="certificates-grid" id="certificatesGrid">
+    </div>
+    
+    <!-- Pagination -->
+    <div class="certificates-pagination">
+      <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <div class="pagination-info">
+        <span class="page-number" id="currentPage">1</span>
+        <span class="page-separator">/</span>
+        <span class="total-pages" id="totalPages">2</span>
       </div>
+      <button class="pagination-btn" id="nextBtn" onclick="changePage(1)">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+    
+    <!-- Page Indicators -->
+    <div class="page-indicators" id="pageIndicators"></div>
+  </div>
     </section>
 
     <!-- Contact Section -->
@@ -1021,41 +661,12 @@
               minlength="10"
               rows="6"
             ></textarea>
-            <small
-              style="
-                opacity: 0.7;
-                font-size: 0.875rem;
-                margin-top: 0.5rem;
-                display: block;
-              "
-            >
-              Minimal 10 karakter
-            </small>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%">
             <i class="bi bi-send"></i> Send Message
           </button>
         </form>
-        <div class="social-links">
-          <a href="https://github.com" target="_blank" class="social-link">
-            <i class="bi bi-github"></i>
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="social-link">
-            <i class="bi bi-linkedin"></i>
-          </a>
-          <a
-            href="https://wa.me/6281234567890"
-            target="_blank"
-            class="social-link"
-          >
-            <i class="bi bi-whatsapp"></i>
-          </a>
-          <a href="mailto:dimas@example.com" class="social-link">
-            <i class="bi bi-envelope"></i>
-          </a>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
@@ -1076,7 +687,7 @@
     <!-- Floating Social Links -->
     <div class="floating-social">
       <a
-        href="https://github.com"
+        href="https://github.com/Dimas01102"
         target="_blank"
         class="floating-social-link github"
         title="GitHub"
@@ -1084,7 +695,7 @@
         <i class="bi bi-github"></i>
       </a>
       <a
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/in/dimas-dwi-prasetiyo-13706820b/"
         target="_blank"
         class="floating-social-link linkedin"
         title="LinkedIn"
@@ -1092,7 +703,7 @@
         <i class="bi bi-linkedin"></i>
       </a>
       <a
-        href="https://wa.me/6281234567890"
+        href="https://wa.me/6282287446410"
         target="_blank"
         class="floating-social-link whatsapp"
         title="WhatsApp"
@@ -1100,7 +711,7 @@
         <i class="bi bi-whatsapp"></i>
       </a>
       <a
-        href="https://instagram.com"
+        href="https://www.instagram.com/dms.prasetiyo/"
         target="_blank"
         class="floating-social-link instagram"
         title="Instagram"
@@ -1108,7 +719,7 @@
         <i class="bi bi-instagram"></i>
       </a>
       <a
-        href="mailto:dimas@example.com"
+        href="ddimasddpprasetiyo@gmail.com"
         class="floating-social-link email"
         title="Email"
       >

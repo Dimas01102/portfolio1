@@ -13,6 +13,192 @@ const CV_URL =
 const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
 
 // ==============================================
+// LOADING SCREEN
+// ==============================================
+window.addEventListener('load', () => {
+  const loadingScreen = document.getElementById('loadingScreen');
+  const loadingProgress = document.getElementById('loadingProgress');
+  const loadingPercentage = document.getElementById('loadingPercentage');
+  const loadingStatus = document.getElementById('loadingStatus');
+  const filesLoaded = document.getElementById('filesLoaded');
+  const modulesLoaded = document.getElementById('modulesLoaded');
+  const cpuUsage = document.getElementById('cpuUsage');
+  const terminalCommand = document.getElementById('terminalCommand');
+  const terminalOutput = document.getElementById('terminalOutput');
+  
+  // Loading messages
+  const statusMessages = [
+    'Initializing systems...',
+    'Loading assets...',
+    'Compiling modules...',
+    'Building components...',
+    'Optimizing performance...',
+    'Establishing connection...',
+    'Ready to launch!'
+  ];
+  
+  const commands = [
+    'npm install',
+    'npm run build',
+    'npm start'
+  ];
+  
+  const terminalMessages = [
+    '> Checking dependencies...',
+    '> Installing packages...',
+    '✓ Dependencies installed successfully',
+    '> Building production bundle...',
+    '✓ Build completed',
+    '> Starting development server...',
+    '✓ Server running on port 3000',
+    '> Opening browser...'
+  ];
+  
+  let progress = 0;
+  let messageIndex = 0;
+  let commandIndex = 0;
+  let terminalIndex = 0;
+  let charIndex = 0;
+  
+  // Code Rain Effect
+  createCodeRain();
+  
+  // Type command animation
+  function typeCommand() {
+    if (commandIndex < commands.length && charIndex < commands[commandIndex].length) {
+      terminalCommand.textContent += commands[commandIndex][charIndex];
+      charIndex++;
+      setTimeout(typeCommand, 50);
+    } else if (commandIndex < commands.length - 1) {
+      setTimeout(() => {
+        commandIndex++;
+        charIndex = 0;
+        terminalCommand.textContent = '';
+        typeCommand();
+      }, 500);
+    }
+  }
+  
+  // Add terminal output
+  function addTerminalOutput() {
+    if (terminalIndex < terminalMessages.length) {
+      const line = document.createElement('div');
+      line.textContent = terminalMessages[terminalIndex];
+      line.style.animationDelay = `${terminalIndex * 0.1}s`;
+      terminalOutput.appendChild(line);
+      terminalIndex++;
+      
+      setTimeout(addTerminalOutput, 400);
+    }
+  }
+  
+  // Start animations
+  setTimeout(typeCommand, 500);
+  setTimeout(addTerminalOutput, 1000);
+  
+  // Progress animation
+  const loadingInterval = setInterval(() => {
+    progress += Math.random() * 12;
+    
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(loadingInterval);
+      
+      // Update final state
+      loadingProgress.style.width = '100%';
+      loadingPercentage.textContent = '100%';
+      loadingStatus.textContent = statusMessages[statusMessages.length - 1];
+      filesLoaded.textContent = '127';
+      modulesLoaded.textContent = '48';
+      cpuUsage.textContent = '100';
+      
+      // Hide loading screen
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+        document.body.classList.remove('loading');
+        
+        // Trigger entrance animations
+        document.querySelectorAll('section').forEach((section, index) => {
+          setTimeout(() => {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+      }, 800);
+    } else {
+      // Update progress
+      loadingProgress.style.width = progress + '%';
+      loadingPercentage.textContent = Math.floor(progress) + '%';
+      
+      // Update status message
+      const msgIndex = Math.min(
+        Math.floor((progress / 100) * statusMessages.length),
+        statusMessages.length - 1
+      );
+      loadingStatus.textContent = statusMessages[msgIndex];
+      
+      // Update stats
+      filesLoaded.textContent = Math.floor((progress / 100) * 127);
+      modulesLoaded.textContent = Math.floor((progress / 100) * 48);
+      cpuUsage.textContent = Math.min(Math.floor(progress + Math.random() * 10), 100);
+    }
+  }, 150);
+});
+
+// Code Rain Effect
+function createCodeRain() {
+  const codeRain = document.getElementById('codeRain');
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン<>{}[]();=+-*/%$#@!';
+  const columns = Math.floor(window.innerWidth / 20);
+  
+  for (let i = 0; i < columns; i++) {
+    const column = document.createElement('div');
+    column.style.position = 'absolute';
+    column.style.left = i * 20 + 'px';
+    column.style.top = -Math.random() * 500 + 'px';
+    column.style.color = '#3b82f6';
+    column.style.fontSize = '14px';
+    column.style.fontFamily = 'JetBrains Mono, monospace';
+    column.style.animation = `fall ${5 + Math.random() * 5}s linear infinite`;
+    column.style.animationDelay = Math.random() * 5 + 's';
+    column.style.opacity = '0.3';
+    
+    let text = '';
+    for (let j = 0; j < 30; j++) {
+      text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+    }
+    column.innerHTML = text;
+    
+    codeRain.appendChild(column);
+  }
+  
+  // Add keyframe for falling
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.3;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Add loading class to body initially
+document.body.classList.add('loading');
+
+// ==============================================
 // THEME TOGGLE
 // ==============================================
 const themeToggle = document.getElementById("themeToggle");
@@ -239,7 +425,7 @@ contactForm.addEventListener("submit", async (e) => {
     )}%0D%0A%0D%0AFrom: ${document.getElementById("email").value}`;
 
     showNotification(
-      "⚠️ Gagal mengirim email otomatis. Klik OK untuk membuka email client Anda.",
+      "⚠️ Gagal mengirim email.",
       "warning",
       () => (window.location.href = mailtoLink)
     );
@@ -425,7 +611,7 @@ function downloadCV(e) {
 
 // Alternative: Using base64 embedded CV (if file is small)
 function downloadCVBase64() {
-  // Untuk CV kecil, Anda bisa embed sebagai base64
+  // Untuk CV
   const cvData = "JVBERi0xLjQKJcfsj6IKNSAwIG9iago8PC9MZW5..."; // Your base64 CV data
 
   const byteCharacters = atob(cvData);
@@ -510,17 +696,17 @@ const skillCardObserver = new IntersectionObserver(
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0) scale(1)";
-        }, index * 100);
+          entry.target.style.transform = "translateY(0)";
+        }, index * 50);
       }
     });
   },
   { threshold: 0.1 }
 );
 
-document.querySelectorAll(".skill-card-wrapper").forEach((card) => {
+document.querySelectorAll(".skill-card").forEach((card) => {
   card.style.opacity = "0";
-  card.style.transform = "translateY(30px) scale(0.9)";
+  card.style.transform = "translateY(30px)";
   card.style.transition = "all 0.5s ease";
   skillCardObserver.observe(card);
 });
@@ -545,6 +731,214 @@ document.querySelectorAll(".project-card").forEach((card) => {
   card.style.transform = "translateY(50px)";
   card.style.transition = "all 0.6s ease";
   projectCardObserver.observe(card);
+});
+
+// ==============================================
+// CERTIFICATES DATA & PAGINATION
+// ==============================================
+const certificatesData = [
+  {
+    img: 'assets/img/cer1.jpg',
+    title: 'Belajar Dasar Pemrograman JavaScript',
+    issuer: 'Dicoding - 2024'
+  },
+  {
+    img: 'assets/img/cer2.jpg',
+    title: 'Memulai Pemrograman Dengan Python',
+    issuer: 'Dicoding - 2024'
+  },
+  {
+    img: 'assets/img/cer3.jpg',
+    title: 'Memulai Pemrograman C',
+    issuer: 'Dicoding - 2025'
+  },
+  {
+    img: 'assets/img/cer4.jpg',
+    title: 'Belajar Prinsip Pemrograman Solid',
+    issuer: 'Dicoding - 2025'
+  },
+  {
+    img: 'assets/img/cer5.jpg',
+    title: 'Cloud Practitioner Essentials (Belajar Dasar AWS Cloud)',
+    issuer: 'Dicoding - 2024'
+  },
+  {
+    img: 'assets/img/cer6.jpg',
+    title: 'Belajar Back-End Pemula dengan JavaScript',
+    issuer: 'Dicoding - 2022'
+  },
+  {
+    img: 'assets/img/cer7.jpg',
+    title: 'Belajar Dasar Manajemen Projek',
+    issuer: 'Dicoding - 2025'
+  },
+  {
+    img: 'assets/img/cer8.jpg',
+    title: 'Belajar Dasar AI',
+    issuer: 'Dicoding - 2025'
+  },
+  {
+    img: 'assets/img/cer9.png',
+    title: 'Full Stack Web Development',
+    issuer: 'Purwadhika - 2025'
+  },
+  {
+    img: 'assets/img/cer10.png',
+    title: 'UI/UX Design',
+    issuer: 'Purwadhika - 2025'
+  }
+];
+
+let currentPage = 1;
+const itemsPerPage = 6;
+const totalPages = Math.ceil(certificatesData.length / itemsPerPage);
+
+// Initialize certificates
+function initCertificates() {
+  renderCertificates();
+  renderPageIndicators();
+  updatePaginationButtons();
+}
+
+// Render certificates for current page
+function renderCertificates() {
+  const grid = document.getElementById('certificatesGrid');
+  grid.innerHTML = '';
+  
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCerts = certificatesData.slice(startIndex, endIndex);
+  
+  currentCerts.forEach((cert, index) => {
+    const card = document.createElement('div');
+    card.className = 'certificate-card';
+    card.style.transition = 'all 0.5s ease';
+    card.style.transitionDelay = `${index * 0.1}s`;
+    card.onclick = () => openModal(cert.img);
+    
+    card.innerHTML = `
+      <div class="certificate-shine"></div>
+      <div class="certificate-image">
+        <img src="${cert.img}" alt="Certificate" />
+      </div>
+      <div class="certificate-info">
+        <h3>${cert.title}</h3>
+        <p class="certificate-issuer">${cert.issuer}</p>
+        <div class="certificate-actions">
+          <button onclick="event.stopPropagation(); openModal('${cert.img}')" class="cert-btn view-btn">
+            <i class="bi bi-eye"></i> View
+          </button>
+          <button onclick="event.stopPropagation()" class="cert-btn verify-btn">
+            <i class="bi bi-patch-check"></i> Verify
+          </button>
+        </div>
+      </div>
+    `;
+    
+    grid.appendChild(card);
+    
+    // Trigger animation
+    setTimeout(() => {
+      card.classList.add('aos-animate');
+    }, 50);
+  });
+  
+  // Update page number
+  document.getElementById('currentPage').textContent = currentPage;
+  document.getElementById('totalPages').textContent = totalPages;
+}
+
+// Change page
+function changePage(direction) {
+  const newPage = currentPage + direction;
+  
+  if (newPage >= 1 && newPage <= totalPages) {
+    currentPage = newPage;
+    
+    // Fade out current certificates
+    const cards = document.querySelectorAll('.certificate-card');
+    cards.forEach(card => {
+      card.classList.remove('aos-animate');
+    });
+    
+    // Render new certificates after animation
+    setTimeout(() => {
+      renderCertificates();
+      updatePaginationButtons();
+      updatePageIndicators();
+      
+      // Scroll to certificates section
+      document.getElementById('certificates').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }, 300);
+  }
+}
+
+// Specific page
+function goToPage(page) {
+  if (page !== currentPage && page >= 1 && page <= totalPages) {
+    currentPage = page;
+    
+    const cards = document.querySelectorAll('.certificate-card');
+    cards.forEach(card => {
+      card.classList.remove('aos-animate');
+    });
+    
+    setTimeout(() => {
+      renderCertificates();
+      updatePaginationButtons();
+      updatePageIndicators();
+      
+      document.getElementById('certificates').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }, 300);
+  }
+}
+
+// pagination buttons state
+function updatePaginationButtons() {
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
+}
+
+// Render page indicators
+function renderPageIndicators() {
+  const container = document.getElementById('pageIndicators');
+  container.innerHTML = '';
+  
+  for (let i = 1; i <= totalPages; i++) {
+    const indicator = document.createElement('div');
+    indicator.className = 'page-indicator';
+    if (i === currentPage) {
+      indicator.classList.add('active');
+    }
+    indicator.onclick = () => goToPage(i);
+    container.appendChild(indicator);
+  }
+}
+
+// page indicators
+function updatePageIndicators() {
+  const indicators = document.querySelectorAll('.page-indicator');
+  indicators.forEach((indicator, index) => {
+    if (index + 1 === currentPage) {
+      indicator.classList.add('active');
+    } else {
+      indicator.classList.remove('active');
+    }
+  });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  initCertificates();
 });
 
 // ==============================================
@@ -602,28 +996,6 @@ window.addEventListener("scroll", () => {
     heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
     heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
   }
-});
-
-// ==============================================
-// RIPPLE EFFECT
-// ==============================================
-document.querySelectorAll(".btn").forEach((button) => {
-  button.addEventListener("click", function (e) {
-    const ripple = document.createElement("span");
-    const rect = this.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - size / 2;
-    const y = e.clientY - rect.top - size / 2;
-
-    ripple.style.width = ripple.style.height = size + "px";
-    ripple.style.left = x + "px";
-    ripple.style.top = y + "px";
-    ripple.classList.add("ripple-effect");
-
-    this.appendChild(ripple);
-
-    setTimeout(() => ripple.remove(), 600);
-  });
 });
 
 // ==============================================
