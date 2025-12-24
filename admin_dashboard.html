@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fa;
+      color: #2d3748;
+    }
+
+    .dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: #1e293b;
+      color: white;
+      padding: 2rem 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #3b82f6, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-menu {
+      padding: 1.5rem 0;
+    }
+
+    .menu-item {
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background: rgba(59, 130, 246, 0.1);
+      color: white;
+      border-left-color: #3b82f6;
+    }
+
+    .menu-item i {
+      font-size: 1.2rem;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 260px;
+      padding: 2rem;
+    }
+
+    .header {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      color: #1e293b;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #64748b;
+      color: white;
+    }
+
+    /* Content Sections */
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f8fafc;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      font-weight: 600;
+      color: #475569;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .modal-header h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .modal-close:hover {
+      color: #ef4444;
+    }
+
+    /* Image Preview */
+    .image-preview {
+      width: 100%;
+      max-width: 300px;
+      height: 200px;
+      border: 2px dashed #e2e8f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .image-preview.empty {
+      color: #94a3b8;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .stat-icon.blue {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .stat-icon.green {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    .stat-icon.purple {
+      background: rgba(139, 92, 246, 0.1);
+      color: #8b5cf6;
+    }
+
+    .stat-info h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-info p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      padding: 0.7rem 1.5rem;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Dashboard Admin</h2>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Portfolio Manager</p>
+      </div>
+      <nav class="sidebar-menu">
+        <div class="menu-item active" data-section="dashboard">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </div>
+        <div class="menu-item" data-section="skills">
+          <i class="bi bi-code-square"></i>
+          <span>Skills</span>
+        </div>
+        <div class="menu-item" data-section="projects">
+          <i class="bi bi-folder"></i>
+          <span>Projects</span>
+        </div>
+        <div class="menu-item" data-section="certificates">
+          <i class="bi bi-award"></i>
+          <span>Certificates</span>
+        </div>
+        <div class="menu-item" data-section="profile">
+          <i class="bi bi-person-circle"></i>
+          <span>Profile Photo</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="header">
+        <h1>Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          Logout
+        </button>
+      </div>
+
+      <!-- Dashboard Section -->
+      <section class="content-section active" id="dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <i class="bi bi-code-square"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="skillCount">0</h3>
+              <p>Total Skills</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <i class="bi bi-folder"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="projectCount">0</h3>
+              <p>Total Projects</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">
+              <i class="bi bi-award"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="certCount">0</h3>
+              <p>Total Certificates</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Selamat Datang di Dashboard Admin</h3>
+          <p>Gunakan menu di samping untuk mengelola konten portfolio Anda.</p>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="content-section" id="skills">
+        <div class="card">
+          <div class="card-title">
+            <h3>Manage Skills</h3>
+            <button class="btn btn-primary" onclick="openSkillModal()">
+              <i class="bi bi-plus-circle"></i> Add Skill
+            </button>
+          </div>
+          <table id="skillsTable">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="skillsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="content-section" id="projects">
+        <div class="card">
+          <div class="card-title">
+            <h3>Manage Projects</h3>
+            <button class="btn btn-primary" onclick="openProjectModal()">
+              <i class="bi bi-plus-circle"></i> Add Project
+            </button>
+          </div>
+          <table id="projectsTable">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Tech Stack</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projectsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Certificates Section -->
+      <section class="content-section" id="certificates">
+        <div class="card">
+          <div class="card-title">
+            <h3>Manage Certificates</h3>
+            <button class="btn btn-primary" onclick="openCertModal()">
+              <i class="bi bi-plus-circle"></i> Add Certificate
+            </button>
+          </div>
+          <table id="certsTable">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Issuer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="certsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Profile Photo Section -->
+      <section class="content-section" id="profile">
+        <div class="card">
+          <div class="card-title">
+            <h3>Profile Photo</h3>
+          </div>
+          <div class="form-group">
+            <label>Current Photo</label>
+            <div class="image-preview">
+              <img id="currentProfilePhoto" src="assets/profile/img.jpg" alt="Profile">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload New Photo</label>
+            <input type="file" id="profilePhotoInput" accept="image/*" onchange="previewProfilePhoto()">
+          </div>
+          <button class="btn btn-success" onclick="updateProfilePhoto()">
+            <i class="bi bi-save"></i> Update Photo
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal for Skills -->
+  <div class="modal" id="skillModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="skillModalTitle">Add Skill</h3>
+        <button class="modal-close" onclick="closeSkillModal()">&times;</button>
+      </div>
+      <form id="skillForm">
+        <input type="hidden" id="skillId">
+        <div class="form-group">
+          <label>Skill Name *</label>
+          <input type="text" id="skillName" required>
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="skillCategory" required>
+            <option value="">Select Category</option>
+            <option value="Frontend Development">Frontend Development</option>
+            <option value="Backend Development">Backend Development</option>
+            <option value="Database & Programming">Database & Programming</option>
+            <option value="Tools & Version Control">Tools & Version Control</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Icon URL *</label>
+          <input type="url" id="skillIcon" required placeholder="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/...">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-save"></i> Save
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="closeSkillModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for Projects -->
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="projectModalTitle">Add Project</h3>
+        <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      </div>
+      <form id="projectForm">
+        <input type="hidden" id="projectId">
+        <div class="form-group">
+          <label>Project Title *</label>
+          <input type="text" id="projectTitle" required>
+        </div>
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea id="projectDesc" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Image URL *</label>
+          <input type="url" id="projectImage" required placeholder="assets/project/pr1.png">
+        </div>
+        <div class="form-group">
+          <label>Tech Stack (comma separated) *</label>
+          <input type="text" id="projectTech" required placeholder="PHP, JAVASCRIPT, BOOTSTRAP">
+        </div>
+        <div class="form-group">
+          <label>Live Demo URL</label>
+          <input type="url" id="projectDemo" placeholder="https://">
+        </div>
+        <div class="form-group">
+          <label>Source Code URL</label>
+          <input type="url" id="projectSource" placeholder="https://github.com/...">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-save"></i> Save
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="closeProjectModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for Certificates -->
+  <div class="modal" id="certModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="certModalTitle">Add Certificate</h3>
+        <button class="modal-close" onclick="closeCertModal()">&times;</button>
+      </div>
+      <form id="certForm">
+        <input type="hidden" id="certId">
+        <div class="form-group">
+          <label>Certificate Title *</label>
+          <input type="text" id="certTitle" required>
+        </div>
+        <div class="form-group">
+          <label>Issuer *</label>
+          <input type="text" id="certIssuer" required placeholder="Dicoding - 2024">
+        </div>
+        <div class="form-group">
+          <label>Image URL *</label>
+          <input type="url" id="certImage" required placeholder="assets/img/cer1.jpg">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-save"></i> Save
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="closeCertModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -8,9 +8,9 @@ const EMAILJS_CONFIG = {
 };
 
 // URL Google Drive/Dropbox untuk CV (ganti dengan link CV Anda)
-const CV_URL =
-  "https://drive.google.com/uc?export=download&id=1hqMZ39JxXNOCW5qPcWBWm4LBeo-ujbXE";
-const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
+// const CV_URL =
+//   "https://drive.google.com/uc?export=download&id=1hqMZ39JxXNOCW5qPcWBWm4LBeo-ujbXE";
+// const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
 
 // ==============================================
 // LOADING SCREEN
