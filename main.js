@@ -2,12 +2,12 @@
 // KONFIGURASI EMAILJS
 // ==============================================
 const EMAILJS_CONFIG = {
-  serviceID: "service_a2rmuqt", // Ganti dengan Service ID Anda
-  templateID: "template_ztwshfq", // Ganti dengan Template ID Anda
-  publicKey: "wvtop_nt2tONpxD-8", // Ganti dengan Public Key Anda
+  serviceID: "service_a2rmuqt", 
+  templateID: "template_ztwshfq", 
+  publicKey: "wvtop_nt2tONpxD-8", 
 };
 
-// URL Google Drive/Dropbox untuk CV (ganti dengan link CV Anda)
+// URL Google Drive/Dropbox untuk CV 
 // const CV_URL =
 //   "https://drive.google.com/uc?export=download&id=1hqMZ39JxXNOCW5qPcWBWm4LBeo-ujbXE";
 // const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
