@@ -8,9 +8,9 @@ const EMAILJS_CONFIG = {
 };
 
 // URL Google Drive/Dropbox untuk CV 
-// const CV_URL =
-//   "https://drive.google.com/uc?export=download&id=1hqMZ39JxXNOCW5qPcWBWm4LBeo-ujbXE";
-// const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
+const CV_URL =
+  "https://drive.google.com/uc?export=download&id=1hqMZ39JxXNOCW5qPcWBWm4LBeo-ujbXE";
+const CV_FILENAME = "CV_Dimas Dwi Prasetiyo.pdf";
 
 // ==============================================
 // LOADING SCREEN
@@ -786,6 +786,11 @@ const certificatesData = [
     img: 'assets/img/cer10.png',
     title: 'UI/UX Design',
     issuer: 'Purwadhika - 2025'
+  },
+  {
+    img: 'assets/img/cer11.jpg',
+    title: 'Project Base Learning: Build Aplikasi Web Pengajuan Dokumen Warga Digital',
+    issuer: 'At Politeknik Negeri Batam- 2025'
   }
 ];
 
