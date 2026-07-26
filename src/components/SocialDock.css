@@ -1,0 +1,24 @@
+.social-dock {
+  position: fixed;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.social-dock__line { width: 1px; height: 32px; background: var(--border); }
+.social-dock__btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: color 0.25s, border-color 0.25s, transform 0.25s, background 0.25s;
+}
+.social-dock__btn:hover { color: #fff; background: var(--accent); border-color: var(--accent); transform: translateX(4px) scale(1.08); }
+
+@media (max-width: 1150px) {
+  .social-dock { display: none; }
+}

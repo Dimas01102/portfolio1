@@ -1,0 +1,84 @@
+.about { position: relative; overflow: hidden; }
+.about__blob {
+  position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.35; pointer-events: none; z-index: 0;
+  animation: aboutDrift 14s ease-in-out infinite;
+}
+.about__blob--a { width: 340px; height: 340px; top: -80px; right: -60px; background: var(--accent); }
+.about__blob--b { width: 260px; height: 260px; bottom: -60px; left: -40px; background: var(--brass); animation-delay: 3s; }
+@keyframes aboutDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -20px) scale(1.08); }
+}
+
+.about__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 52px; }
+.about__body { color: var(--text-secondary); line-height: 1.85; font-size: 1.03rem; max-width: 720px; }
+.about__body p { margin-bottom: 16px; }
+
+.about__meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+.about__meta-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 100px; border: 1px solid var(--border);
+  font-size: 0.84rem; color: var(--text-secondary); background: var(--bg-card);
+}
+.about__meta-item i { color: var(--accent); }
+
+/* ============================================================
+   FLOW: highlight cards connected end-to-end by an animated
+   "data flowing" connector line, like a little pipeline.
+   ============================================================ */
+.about__flow { display: flex; align-items: stretch; }
+.about__flow-node-wrap { flex: 1; min-width: 0; }
+.about__flow-node {
+  height: 100%;
+  padding: 22px 16px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.about__flow-node:hover { transform: translateY(-5px); border-color: var(--accent); }
+.about__flow-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+}
+.about__flow-label { font-weight: 600; font-size: 0.88rem; }
+.about__flow-desc { color: var(--text-muted); font-size: 0.74rem; line-height: 1.4; }
+
+.about__connector {
+  flex: 0 0 34px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about__connector::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 14px);
+  background-size: 28px 2px;
+  opacity: 0.55;
+  animation: flowSlide 0.9s linear infinite;
+}
+@keyframes flowSlide { to { background-position: -28px 0; } }
+.about__connector-pulse {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 6px; height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--brass);
+  box-shadow: 0 0 8px var(--brass);
+  animation: pulseMove 2.4s linear infinite;
+}
+@keyframes pulseMove {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: calc(100% - 6px); opacity: 0; }
+}
+
+@media (max-width: 860px) {
+  .about__flow { flex-direction: column; }
+  .about__connector { display: none; }
+  .about__flow-node-wrap { margin-bottom: 14px; }
+}
