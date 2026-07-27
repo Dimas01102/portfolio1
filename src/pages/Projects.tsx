@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import type { Project } from '../types';
 import Reveal from '../components/Reveal';
-import Lightbox from '../components/Lightbox';
+import ProjectModal from '../components/ProjectModal';
 import Skeleton from '../components/Skeleton';
 import './Projects.css';
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [preview, setPreview] = useState<Project | null>(null);
+  const [selected, setSelected] = useState<Project | null>(null);
 
   useEffect(() => {
     supabase
@@ -55,13 +55,20 @@ export default function ProjectsPage() {
         <div className="projects-grid">
           {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 70}>
-              <article className="card card-glow projects-card">
+              <article
+                className="card card-glow projects-card"
+                role="button"
+                tabIndex={0}
+                onClick={() => setSelected(p)}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setSelected(p)}
+                aria-label={`Lihat detail ${p.title}`}
+              >
                 {p.image_url && (
-                  <button className="projects-card__img-btn" onClick={() => setPreview(p)} aria-label={`Preview ${p.title}`}>
-                    <img src={p.image_url} alt={p.title} className="projects-card__img" />
+                  <div className="projects-card__img-wrap">
+                    <img src={p.image_url} alt={p.title} className="projects-card__img" loading="lazy" decoding="async" />
                     <span className="projects-card__img-hint"><i className="bi bi-zoom-in" /></span>
                     {p.is_featured && <span className="projects-card__featured">Featured</span>}
-                  </button>
+                  </div>
                 )}
                 <div className="projects-card__body">
                   <h3>{p.title}</h3>
@@ -73,7 +80,7 @@ export default function ProjectsPage() {
                       ))}
                     </div>
                   )}
-                  <div className="projects-card__links">
+                  <div className="projects-card__links" onClick={(e) => e.stopPropagation()}>
                     {p.live_url && (
                       <a href={p.live_url} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">
                         <i className="bi bi-box-arrow-up-right" /> Live
@@ -92,9 +99,7 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {preview?.image_url && (
-        <Lightbox src={preview.image_url} alt={preview.title} onClose={() => setPreview(null)} />
-      )}
+      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
     </section>
   );
 }
