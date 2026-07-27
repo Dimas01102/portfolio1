@@ -77,6 +77,16 @@ export default function AdminProfile() {
         </label>
 
         <label>
+          Hero intro (shown on the homepage under your name write as much as you like, it won't be cut off)
+          <textarea
+            rows={4}
+            value={profile.tagline || ''}
+            onChange={(e) => setProfile({ ...profile, tagline: e.target.value })}
+            placeholder="I am a Full Stack Web Developer with over 3 years of experience..."
+          />
+        </label>
+
+        <label>
           About
           <textarea rows={6} value={profile.about} onChange={(e) => setProfile({ ...profile, about: e.target.value })} />
         </label>

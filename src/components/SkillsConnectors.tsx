@@ -7,6 +7,8 @@ interface Line {
   y2: number;
 }
 
+const MAX_LINES = 40; // hard safety cap so a huge skills list can never flood the DOM/paint cost
+
 export default function SkillsConnectors({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
   const [lines, setLines] = useState<Line[]>([]);
   const [box, setBox] = useState({ w: 0, h: 0 });
@@ -26,11 +28,13 @@ export default function SkillsConnectors({ containerRef }: { containerRef: React
       const seen = new Set<string>();
       const next: Line[] = [];
       points.forEach((p, i) => {
+        if (next.length >= MAX_LINES) return;
         const nearest = points
           .map((q, j) => ({ j, d: i === j ? Infinity : Math.hypot(p.x - q.x, p.y - q.y) }))
           .sort((a, b) => a.d - b.d)
           .slice(0, 2);
         nearest.forEach(({ j }) => {
+          if (next.length >= MAX_LINES) return;
           const key = `${Math.min(i, j)}-${Math.max(i, j)}`;
           if (seen.has(key)) return;
           seen.add(key);

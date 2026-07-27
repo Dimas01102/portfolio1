@@ -3,6 +3,7 @@ export interface Profile {
   full_name: string;
   role_titles: string[];
   about: string;
+  tagline: string | null;
   photo_url: string | null;
   resume_url: string | null;
   github_username: string;

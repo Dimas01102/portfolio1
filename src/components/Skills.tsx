@@ -34,7 +34,7 @@ export default function Skills({ skills }: { skills: Skill[] }) {
     <section id="skills" className="section skills">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">03 — Toolkit</p>
+          <p className="eyebrow">02 — Toolkit</p>
           <h2 className="section-title">Skills &amp; expertise</h2>
           <p className="section-desc" style={{ marginBottom: 48 }}>
             The languages, frameworks and tools I reach for most.

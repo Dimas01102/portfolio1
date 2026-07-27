@@ -73,7 +73,9 @@ export default function Hero({ profile }: { profile: Profile | null }) {
             <span className="hero__role-cursor" />
           </p>
           <p className="hero__desc">
-            {profile?.about
+            {profile?.tagline
+              ? profile.tagline
+              : profile?.about
               ? truncateAtWord(profile.about, 200)
               : 'Software engineer crafting polished, production-ready web applications.'}
           </p>
