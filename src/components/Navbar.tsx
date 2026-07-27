@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { goToSection } from '../lib/nav';
 import './Navbar.css';
 
 const LINKS = [
@@ -31,18 +32,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  function handleNav(hash: string) {
-    if (hash.startsWith('/')) {
-      navigate(hash);
-      return;
-    }
-    if (location.pathname !== '/') {
-      navigate('/' + hash);
-    } else {
-      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
   return (
     <header className={`nav-wrap ${scrolled ? 'nav-wrap--scrolled' : ''}`}>
       <div className="nav">
@@ -53,7 +42,7 @@ export default function Navbar() {
 
         <nav className="nav__links">
           {LINKS.map((l) => (
-            <button key={l.label} className="nav__link" onClick={() => handleNav(l.hash)}>
+            <button key={l.label} className="nav__link" onClick={() => goToSection(navigate, location.pathname, l.hash)}>
               {l.label}
             </button>
           ))}

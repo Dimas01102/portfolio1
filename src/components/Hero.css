@@ -62,10 +62,6 @@
 .hero__desc { color: var(--text-secondary); max-width: 480px; line-height: 1.7; margin-bottom: 34px; }
 .hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
-/* ============================================================
-   PHOTO: the photo itself is completely static — only the
-   decorative rings + badge orbit move around it.
-   ============================================================ */
 .hero__photo-wrap {
   position: relative;
   justify-self: center;
@@ -112,8 +108,6 @@
   background: var(--bg-card); font-size: 3.6rem; color: var(--text-muted); width: 100%; height: 100%;
 }
 
-/* orbiting badge group — this rotates; each badge icon counter-rotates
-   with the same duration so it always stays upright while it travels */
 .hero__orbit {
   position: absolute; inset: 0;
   animation: orbitSpin 22s linear infinite;

@@ -7,22 +7,31 @@ certificates) plus a full blog is editable from a password-protected
 
 ## What's inside
 
-- **Public site**: Hero, About, Skills (with a featured row), a live GitHub
-  contribution graph, Certificates, Contact, and a Blog with individual post
+- **Public site**: Hero with animated flowing lines + glowing photo ring, an
+  infinite crossed-ribbon marquee of your tech stack, About, Skills (icon
+  grid, no progress bars), a live GitHub contribution graph with a little
+  snake that crawls across it, Certificates (compact cards with a
+  click-to-enlarge lightbox), a full **Projects** showcase page, Contact
+  (with a floating left-side social dock), and a Blog with individual post
   pages.
 - **Admin panel** (`/admin`): sign in with a Supabase Auth account, then
-  manage your profile photo, about text, skills (CRUD + featured toggle),
-  certificates (CRUD + image upload), and blog posts (CRUD + cover image +
-  publish toggle).
-- **Theme**: a new "professional" palette — deep navy background, a single
+  manage your profile photo, about text, skills (CRUD), certificates (CRUD +
+  image upload), projects (CRUD + image upload), and blog posts (CRUD +
+  cover image + publish toggle). There's no visible "Admin" link anywhere on
+  the public site on purpose — just go to `/admin/login` directly.
+- **Motion & feel**: every card has a soft cursor-following glow, sections
+  fade/slide in as you scroll, the navbar is a floating glass pill, mobile
+  uses a bottom tab bar instead of a hamburger menu, and the first load
+  shows skeleton placeholders instead of a blank page. Everything respects
+  `prefers-reduced-motion`.
+- **Theme**: a "professional" palette — deep navy background, a single
   indigo accent for actions, a warm brass accent for highlights — with a
-  light/dark toggle carried over from the original site.
-- **Boot animation**: a terminal-style loading sequence (like your original
-  `loadingScreen`), rebuilt as a React component, plays once per browser
-  session.
+  light/dark toggle.
+- **Boot animation**: a terminal-style loading sequence, plays once per
+  browser session.
 - **GitHub stats**: pulls your real contribution calendar and public repo
-  count directly from GitHub, styled to match the contribution graph you
-  screenshotted.
+  count directly from GitHub, no token needed.
+
 
 ## 1. Create your Supabase project
 
@@ -73,7 +82,19 @@ content until you fill things in from the admin panel.
    the ones you want to show in the highlighted row.
 4. **Certificates** — add title, issuer, date, and upload the certificate
    image.
-5. **Blog** — write posts, toggle "Published" when ready to go live.
+5. **Projects** — add each project with a screenshot, tech stack tags, and
+   live/repo links. Toggle "Featured" to badge it.
+6. **Blog** — write posts, toggle "Published" when ready to go live.
+7. **Social links** — the left-side social dock and footer currently point
+   to placeholder URLs (`github.com/`, `linkedin.com/`, `wa.me/`,
+   `instagram.com/`, `mailto:hello@example.com`). Open
+   `src/components/SocialDock.tsx` and `src/components/Footer.tsx` and swap
+   in your real profile links — these aren't in the database since they
+   rarely change.
+
+A handful of common skills (React, Laravel, TypeScript, Supabase, etc.) are
+pre-seeded by `schema.sql` so the Skills section isn't empty on first run —
+edit or delete them from `/admin/skills` as you like.
 
 Original images from your old site are copied into `seed-assets/` in this
 project (profile photo, project screenshots) if you want to re-upload any of
@@ -89,6 +110,20 @@ npm run build
 
 Deploy the `dist/` folder, and set the same two `VITE_SUPABASE_*` environment
 variables in your host's dashboard (not just locally in `.env`).
+
+**Important — client-side routing:** this is a single-page app, so a direct
+visit to a URL like `/admin/login` or `/projects` (typing it in the address
+bar, or reloading the page while on it) needs the host to serve `index.html`
+for every path, not just `/`. Without this, those URLs 404 in production even
+though they work fine at `localhost:5173` in dev (Vite's dev server already
+does this automatically, which is why it's easy to miss until you deploy).
+This repo already includes the fix for the two most common hosts:
+- **Vercel** — `vercel.json` (rewrites everything to `index.html`)
+- **Netlify / Cloudflare Pages** — `public/_redirects`
+
+If you're deploying somewhere else (GitHub Pages, a plain Nginx/Apache
+server, etc.), you'll need the equivalent — for Nginx that's
+`try_files $uri /index.html;`, for Apache an `.htaccess` rewrite rule.
 
 ## Notes
 

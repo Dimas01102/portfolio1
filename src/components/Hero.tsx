@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Profile } from '../types';
+import { truncateAtWord } from '../lib/text';
 import './Hero.css';
 
 const LINES = [
@@ -10,8 +11,6 @@ const LINES = [
   { top: '86%', rotate: -6, duration: 11, delay: 3, color: 'var(--accent)' },
 ];
 
-// 6 badges spaced evenly (60deg apart) around the photo. The whole group
-// orbits continuously while each icon counter-rotates so it stays upright.
 const BADGES = [
   { icon: 'bi-git', angle: 0 },
   { icon: 'bi-cloud-fill', angle: 60 },
@@ -74,8 +73,9 @@ export default function Hero({ profile }: { profile: Profile | null }) {
             <span className="hero__role-cursor" />
           </p>
           <p className="hero__desc">
-            {profile?.about?.slice(0, 160) ||
-              'Software engineer crafting polished, production-ready web applications.'}
+            {profile?.about
+              ? truncateAtWord(profile.about, 200)
+              : 'Software engineer crafting polished, production-ready web applications.'}
           </p>
           <div className="hero__cta">
             <a href="#contact" className="btn btn-primary">

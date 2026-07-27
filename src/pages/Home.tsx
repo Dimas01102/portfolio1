@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import type { Profile, Skill, Certificate } from '../types';
 import Hero from '../components/Hero';
@@ -30,6 +31,7 @@ export default function Home() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -44,6 +46,13 @@ export default function Home() {
       setLoading(false);
     })();
   }, []);
+
+  useEffect(() => {
+    if (!loading && location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 50);
+    }
+  }, [loading, location.hash]);
 
   if (loading) return <HomeSkeleton />;
 

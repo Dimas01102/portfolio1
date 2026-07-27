@@ -3,7 +3,11 @@ const LOCAL_ICON_OVERRIDES: Record<string, string> = {
   visualstudiocode: 'vscode',
   visualstudio: 'vscode',
   vs: 'vscode',
+  aws: 'aws',
+  amazonwebservices: 'aws',
+  amazonaws: 'aws',
 };
+
 
 const ICON_ALIASES: Record<string, string> = {
   nodejs: 'nodedotjs',

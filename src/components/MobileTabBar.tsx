@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { goToSection } from '../lib/nav';
 import './MobileTabBar.css';
 
 const TABS = [
-  { key: 'skills', icon: 'bi-star', hash: '#skills' },
-  { key: 'about', icon: 'bi-people', hash: '#about' },
-  { key: 'home', icon: 'bi-house-door-fill', hash: '/' },
-  { key: 'projects', icon: 'bi-building', hash: '/projects' },
-  { key: 'certificates', icon: 'bi-mortarboard', hash: '#certificates' },
+  { key: 'about', label: 'About', icon: 'bi-person-lines-fill', hash: '#about' },
+  { key: 'skills', label: 'Skills', icon: 'bi-star', hash: '#skills' },
+  { key: 'projects', label: 'Projects', icon: 'bi-building', hash: '/projects' },
+  { key: 'home', label: 'Home', icon: 'bi-house-door-fill', hash: '/' },
+  { key: 'certificates', label: 'Certificates', icon: 'bi-mortarboard', hash: '#certificates' },
+  { key: 'blog', label: 'Blog', icon: 'bi-journal-text', hash: '/blog' },
+  { key: 'contact', label: 'Contact', icon: 'bi-envelope', hash: '#contact' },
 ];
 
 export default function MobileTabBar() {
@@ -18,6 +21,7 @@ export default function MobileTabBar() {
 
   useEffect(() => {
     if (location.pathname === '/projects') setActive('projects');
+    else if (location.pathname === '/blog') setActive('blog');
     else if (location.pathname === '/') setActive('home');
   }, [location.pathname]);
 
@@ -25,16 +29,7 @@ export default function MobileTabBar() {
     setActive(tab.key);
     setPop(tab.key);
     setTimeout(() => setPop(null), 320);
-
-    if (tab.hash.startsWith('/')) {
-      navigate(tab.hash);
-      return;
-    }
-    if (location.pathname !== '/') {
-      navigate('/' + tab.hash);
-    } else {
-      document.querySelector(tab.hash)?.scrollIntoView({ behavior: 'smooth' });
-    }
+    goToSection(navigate, location.pathname, tab.hash);
   }
 
   return (
@@ -46,7 +41,7 @@ export default function MobileTabBar() {
             tab.key === 'home' ? 'mtab__btn--home' : ''
           }`}
           onClick={() => handleTap(tab)}
-          aria-label={tab.key}
+          aria-label={tab.label}
         >
           <i className={`bi ${tab.icon}`} />
         </button>

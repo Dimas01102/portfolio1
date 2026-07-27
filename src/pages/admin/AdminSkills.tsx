@@ -11,7 +11,7 @@ const EMPTY: Omit<Skill, 'id' | 'created_at'> = {
 export default function AdminSkills() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [form, setForm] = useState<any>(EMPTY);
-  const [iconTouched, setIconTouched] = useState(false); // has the user hand-edited the icon field?
+  const [iconTouched, setIconTouched] = useState(false); 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -24,7 +24,7 @@ export default function AdminSkills() {
   function startEdit(s: Skill) {
     setEditingId(s.id);
     setForm(s);
-    setIconTouched(true); // don't auto-overwrite an existing icon while editing
+    setIconTouched(true); 
   }
   function resetForm() {
     setEditingId(null);
@@ -36,8 +36,6 @@ export default function AdminSkills() {
     setForm((f: any) => ({
       ...f,
       name,
-      // auto-suggest a real brand logo from Simple Icons as they type,
-      // unless they've manually overridden the icon field themselves
       icon: iconTouched ? f.icon : (name.trim() ? autoIconFor(name) : ''),
     }));
   }
@@ -95,9 +93,11 @@ export default function AdminSkills() {
           </label>
         </div>
         <p className="admin-hint">
-          Logos come free from Simple Icons — typing a name auto-fills <code>si:&lt;name&gt;</code> and
-          shows the real brand icon above. If a logo doesn't exist for it, edit the field to any{' '}
-          <a href="https://icons.getbootstrap.com" target="_blank" rel="noreferrer">Bootstrap Icons</a> class instead, e.g. <code>bi-code-slash</code>.
+          Typing a name auto-fills <code>si:&lt;name&gt;</code> and shows the real brand logo above — this isn't
+          limited to a fixed list, it works for any of the <a href="https://simpleicons.org" target="_blank" rel="noreferrer">3000+ logos on Simple Icons</a> (just
+          browse there and copy the exact slug into the field if auto-detect guesses wrong). A few trademarked
+          tools (VS Code, AWS) aren't on Simple Icons at all, so those are bundled locally and just work. For
+          anything else, you're free to type any <a href="https://icons.getbootstrap.com" target="_blank" rel="noreferrer">Bootstrap Icons</a> class instead, e.g. <code>bi-cloud-fill</code>.
         </p>
 
         <div className="admin-form-row">
