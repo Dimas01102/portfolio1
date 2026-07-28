@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, lazy, Suspense, type ReactNode } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Loader from './components/Loader';
@@ -20,7 +20,10 @@ import AdminSkills from './pages/admin/AdminSkills';
 import AdminCertificates from './pages/admin/AdminCertificates';
 import AdminBlog from './pages/admin/AdminBlog';
 import AdminProjects from './pages/admin/AdminProjects';
+import AdminGames from './pages/admin/AdminGames';
 import ProtectedRoute from './components/ProtectedRoute';
+
+const Games = lazy(() => import('./pages/Games'));
 
 function PublicLayout({ children }: { children: ReactNode }) {
   return (
@@ -36,8 +39,6 @@ function PublicLayout({ children }: { children: ReactNode }) {
   );
 }
 
-/** One delegated mousemove listener powers every .card-glow element's
- *  cursor-tracking light — far cheaper than a listener per card. */
 function useCardGlow() {
   useEffect(() => {
     let raf = 0;
@@ -86,6 +87,16 @@ export default function App() {
         <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
         <Route path="/blog/:slug" element={<PublicLayout><BlogPostPage /></PublicLayout>} />
         <Route path="/projects" element={<PublicLayout><ProjectsPage /></PublicLayout>} />
+        <Route
+          path="/games/*"
+          element={
+            <PublicLayout>
+              <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+                <Games />
+              </Suspense>
+            </PublicLayout>
+          }
+        />
 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
@@ -102,6 +113,7 @@ export default function App() {
           <Route path="certificates" element={<AdminCertificates />} />
           <Route path="projects" element={<AdminProjects />} />
           <Route path="blog" element={<AdminBlog />} />
+          <Route path="games" element={<AdminGames />} />
         </Route>
       </Routes>
     </AuthProvider>

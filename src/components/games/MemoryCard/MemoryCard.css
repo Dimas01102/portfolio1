@@ -1,0 +1,47 @@
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  perspective: 800px;
+}
+@media (max-width: 480px) {
+  .memory-board { grid-template-columns: repeat(2, 1fr); }
+}
+.memory-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.memory-card.is-flipped { transform: rotateY(180deg); }
+.memory-card.is-matched { opacity: 0.55; }
+.memory-card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 6px;
+}
+.memory-card__face--back {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+.memory-card__face--front {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  transform: rotateY(180deg);
+}
+.memory-card.is-matched .memory-card__face--front {
+  border-color: var(--success);
+  color: var(--success);
+}

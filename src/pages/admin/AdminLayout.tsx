@@ -9,6 +9,7 @@ const NAV = [
   { to: '/admin/certificates', label: 'Certificates', icon: 'bi-patch-check' },
   { to: '/admin/projects', label: 'Projects', icon: 'bi-kanban' },
   { to: '/admin/blog', label: 'Blog posts', icon: 'bi-journal-text' },
+  { to: '/admin/games', label: 'Mini Games', icon: 'bi-controller' },
 ];
 
 export default function AdminLayout() {

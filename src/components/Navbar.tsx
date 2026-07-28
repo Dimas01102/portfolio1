@@ -8,6 +8,7 @@ const LINKS = [
   { label: 'About', hash: '#about' },
   { label: 'Skills', hash: '#skills' },
   { label: 'Projects', hash: '/projects' },
+  { label: 'Games', hash: '/games' },
   { label: 'Certificates', hash: '#certificates' },
   { label: 'Blog', hash: '/blog' },
   { label: 'Contact', hash: '#contact' },

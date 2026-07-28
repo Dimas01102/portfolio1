@@ -4,15 +4,17 @@
 
 @media (max-width: 900px) {
   .mtab {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
     align-items: center;
-    justify-content: space-between;
+    justify-items: center;
     position: fixed;
     left: 50%;
     bottom: 16px;
     transform: translateX(-50%);
-    width: min(390px, calc(100vw - 20px));
-    padding: 8px 10px;
+    width: min(420px, calc(100vw - 20px));
+    height: 56px;
+    padding: 0 8px;
     border-radius: 100px;
     background: color-mix(in srgb, var(--bg-card) 78%, transparent);
     backdrop-filter: blur(18px) saturate(160%);
@@ -23,46 +25,78 @@
   }
 
   .mtab__btn {
-    background: none;
+    background: transparent;
     border: none;
     color: var(--text-muted);
-    font-size: 1rem;
-    width: 36px;
-    height: 36px;
+    font-size: 0.95rem;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .mtab__btn.is-active { color: var(--accent); background: var(--accent-soft); }
-  .mtab__btn--home {
+
+  .mtab__btn:nth-child(4) {
+    grid-column: 4 / 6;
+    justify-self: center;
+  }
+
+  .mtab__btn.is-active {
     background: var(--accent);
     color: #fff;
-    width: 44px;
-    height: 44px;
-    font-size: 1.1rem;
-    transform: translateY(-9px);
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+    transform: translateY(-14px);
     box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 50%, transparent);
   }
-  .mtab__btn--home.is-active { background: var(--accent); color: #fff; }
-  .mtab__btn.is-pop { animation: mtabPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
-  @keyframes mtabPop {
-    0% { transform: scale(1) translateY(0); }
-    45% { transform: scale(1.28) translateY(-6px); }
-    100% { transform: scale(1) translateY(0); }
+
+  .mtab__btn.is-pop {
+    animation: mtabPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .mtab__btn--home.is-pop { animation: mtabPopHome 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
-  @keyframes mtabPopHome {
-    0% { transform: scale(1) translateY(-9px); }
-    45% { transform: scale(1.25) translateY(-15px); }
-    100% { transform: scale(1) translateY(-9px); }
+
+  @keyframes mtabPop {
+    0% {
+      transform: translateY(-14px) scale(1);
+    }
+    45% {
+      transform: translateY(-22px) scale(1.15);
+    }
+    100% {
+      transform: translateY(-14px) scale(1);
+    }
   }
 }
 
+/* Layar HP Kecil */
 @media (max-width: 380px) {
-  .mtab { width: calc(100vw - 14px); padding: 7px 6px; }
-  .mtab__btn { width: 32px; height: 32px; font-size: 0.92rem; }
-  .mtab__btn--home { width: 40px; height: 40px; font-size: 1.02rem; }
+  .mtab {
+    width: calc(100vw - 12px);
+    padding: 0 6px;
+    height: 48px;
+  }
+  .mtab__btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+  .mtab__btn.is-active {
+    width: 44px;
+    height: 44px;
+    font-size: 1.15rem;
+    transform: translateY(-12px);
+  }
+  @keyframes mtabPop {
+    0% {
+      transform: translateY(-12px) scale(1);
+    }
+    45% {
+      transform: translateY(-18px) scale(1.15);
+    }
+    100% {
+      transform: translateY(-12px) scale(1);
+    }
+  }
 }
