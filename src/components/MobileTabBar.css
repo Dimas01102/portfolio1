@@ -4,53 +4,77 @@
 
 @media (max-width: 900px) {
   .mtab {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    display: flex;
     align-items: center;
-    justify-items: center;
     position: fixed;
     left: 50%;
     bottom: 16px;
     transform: translateX(-50%);
-    width: min(420px, calc(100vw - 20px));
+    width: min(430px, calc(100vw - 20px));
     height: 56px;
-    padding: 0 8px;
+    padding: 0 6px;
     border-radius: 100px;
+    z-index: 600;
+    overflow: visible;
+
+    --notch-x: 195px;
+    --notch-size: 68px;
+  }
+
+  .mtab::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
     background: color-mix(in srgb, var(--bg-card) 78%, transparent);
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-lg);
-    z-index: 600;
+    z-index: 0;
+  }
+
+  .mtab__notch {
+    position: absolute;
+    top: -16px;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translate3d(calc(var(--notch-x) - 24px), 0, 0);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 1;
   }
 
   .mtab__btn {
+    position: relative;
+    z-index: 2;
+    flex: 1 1 0;
     background: transparent;
     border: none;
     color: var(--text-muted);
     font-size: 0.95rem;
     width: 32px;
     height: 32px;
+    margin: 0 auto;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .mtab__btn:nth-child(4) {
-    grid-column: 4 / 6;
-    justify-self: center;
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      color 0.3s ease,
+      font-size 0.3s ease;
   }
 
   .mtab__btn.is-active {
-    background: var(--accent);
     color: #fff;
-    width: 48px;
-    height: 48px;
     font-size: 1.25rem;
-    transform: translateY(-14px);
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translateY(-16px);
   }
 
   .mtab__btn.is-pop {
@@ -59,13 +83,13 @@
 
   @keyframes mtabPop {
     0% {
-      transform: translateY(-14px) scale(1);
+      transform: translateY(-16px) scale(1);
     }
     45% {
-      transform: translateY(-22px) scale(1.15);
+      transform: translateY(-24px) scale(1.15);
     }
     100% {
-      transform: translateY(-14px) scale(1);
+      transform: translateY(-16px) scale(1);
     }
   }
 }
@@ -74,29 +98,47 @@
 @media (max-width: 380px) {
   .mtab {
     width: calc(100vw - 12px);
-    padding: 0 6px;
+    padding: 0 4px;
     height: 48px;
+    --notch-size: 60px;
   }
+
+  .mtab__notch {
+    width: 42px;
+    height: 42px;
+    top: -14px;
+    transform: translate3d(calc(var(--notch-x) - 21px), 0, 0);
+  }
+
   .mtab__btn {
     width: 28px;
     height: 28px;
     font-size: 0.85rem;
   }
+
   .mtab__btn.is-active {
-    width: 44px;
-    height: 44px;
-    font-size: 1.15rem;
-    transform: translateY(-12px);
+    font-size: 1.1rem;
+    transform: translateY(-14px);
   }
+
   @keyframes mtabPop {
     0% {
-      transform: translateY(-12px) scale(1);
+      transform: translateY(-14px) scale(1);
     }
     45% {
-      transform: translateY(-18px) scale(1.15);
+      transform: translateY(-20px) scale(1.15);
     }
     100% {
-      transform: translateY(-12px) scale(1);
+      transform: translateY(-14px) scale(1);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mtab,
+  .mtab__notch,
+  .mtab__btn {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
