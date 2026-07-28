@@ -3,7 +3,7 @@ import Reveal from './Reveal';
 import './About.css';
 
 const HIGHLIGHTS = [
-  { icon: 'bi-mortarboard', label: 'TRPL Student', desc: 'Politeknik Negeri Batam' },
+  { icon: 'bi-mortarboard', label: 'Software Engineering Student', desc: 'Politeknik Negeri Batam' },
   { icon: 'bi-layers', label: 'Fullstack', desc: 'Laravel + React/TS' },
   { icon: 'bi-lightning-charge', label: 'Ships Fast', desc: 'Polished, production-ready' },
   { icon: 'bi-people', label: 'Team Player', desc: 'Collaborates in squads of 6' },
