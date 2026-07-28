@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import MobileTabBar from './components/MobileTabBar';
 import SocialDock from './components/SocialDock';
 import ScrollToTop from './components/ScrollToTop';
+import ChatBot from './components/ChatBot';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPostPage from './pages/BlogPost';
@@ -30,6 +31,7 @@ function PublicLayout({ children }: { children: ReactNode }) {
       <Footer />
       <MobileTabBar />
       <ScrollToTop />
+      <ChatBot />
     </>
   );
 }

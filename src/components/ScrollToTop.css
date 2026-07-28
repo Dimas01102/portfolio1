@@ -1,7 +1,7 @@
 .scroll-top {
   position: fixed;
   right: 24px;
-  bottom: 30px;
+  bottom: 96px;
   z-index: 450;
   width: 46px;
   height: 46px;
@@ -23,5 +23,5 @@
 .scroll-top:hover { border-color: var(--accent); background: var(--accent); color: #fff; transform: translateY(-3px) scale(1.05); }
 
 @media (max-width: 900px) {
-  .scroll-top { right: 18px; bottom: 90px; width: 42px; height: 42px; }
+  .scroll-top { right: 18px; bottom: 148px; width: 42px; height: 42px; }
 }
