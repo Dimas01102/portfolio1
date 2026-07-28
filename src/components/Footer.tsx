@@ -24,7 +24,10 @@ export default function Footer() {
         <nav className="site-footer__links">
           <Link to="/">Home</Link>
           <Link to="/#about">About</Link>
+          <Link to="/#skills">Skills</Link>
           <Link to="/projects">Projects</Link>
+          <Link to="/games">Games</Link>
+          <Link to="/#certificates">Certificates</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/#contact">Contact</Link>
         </nav>
