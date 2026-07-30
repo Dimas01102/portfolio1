@@ -244,12 +244,6 @@ img {
   transform: translateY(0);
 }
 
-/* ============================================================
-   CURSOR-FOLLOW CARD GLOW
-   Applied via .card-glow; a single delegated mousemove listener
-   (see App.tsx) updates --mx/--my per element for a soft light
-   that tracks the pointer cheap, no per-card listeners.
-   ============================================================ */
 .card-glow {
   position: relative;
   overflow: hidden;

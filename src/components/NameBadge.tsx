@@ -32,22 +32,12 @@ export default function NameBadge({ photoUrl, name, role }: NameBadgeProps) {
 
   const ANCHOR_Y = -6; // px, top attachment point relative to wrap
   const REST_DROP = 84; // px, string length at rest (matches card's CSS top)
-  const ROPE_MAX = 130;
-  const MAX_VELOCITY = 26; // px/frame cap so a fast flick can't send it flying + jank the spring loop
+  // No distance/velocity limit here on purpose — the badge is free to fly as far
+  // as a drag/flick sends it, just like the original. Page-wide horizontal scroll
+  // is instead hard-blocked globally via overflow-x: hidden on html/body/#root
+  // (see index.css), so letting the badge itself travel unrestricted is safe.
 
-  const clampRadial = (x: number, y: number) => {
-    const dist = Math.hypot(x, y);
-    if (dist <= ROPE_MAX) return { x, y };
-    const scale = ROPE_MAX / dist;
-    return { x: x * scale, y: y * scale };
-  };
-
-  const clampVelocity = (vx: number, vy: number) => {
-    const speed = Math.hypot(vx, vy);
-    if (speed <= MAX_VELOCITY) return { vx, vy };
-    const scale = MAX_VELOCITY / speed;
-    return { vx: vx * scale, vy: vy * scale };
-  };
+  const clampRadial = (x: number, y: number) => ({ x, y });
 
   const applyTransform = useCallback((rawX: number, rawY: number) => {
     const card = cardRef.current;
@@ -124,7 +114,6 @@ export default function NameBadge({ photoUrl, name, role }: NameBadgeProps) {
   }, [applyTransform]);
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if (e.pointerType === 'touch') return;
     const card = cardRef.current;
     if (!card) return;
     card.classList.remove('badge-card--idle');
@@ -152,10 +141,9 @@ export default function NameBadge({ photoUrl, name, role }: NameBadgeProps) {
     target.current.x = clamped.x;
     target.current.y = clamped.y;
 
-    // instant velocity so release feels like a real flick (capped to avoid runaway spring overshoot)
-    const flicked = clampVelocity((dx / dt) * 14, (dy / dt) * 14);
-    vel.current.x = flicked.vx;
-    vel.current.y = flicked.vy;
+    // instant velocity so release feels like a real flick
+    vel.current.x = (dx / dt) * 14;
+    vel.current.y = (dy / dt) * 14;
 
     pos.current.x = target.current.x;
     pos.current.y = target.current.y;

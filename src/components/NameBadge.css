@@ -3,7 +3,7 @@
   width: 280px;
   max-width: 100%;
   margin: 0 auto;
-  height: 480px;
+  height: 500px;
   perspective: 1300px;
   transform: translateY(-240px) rotate(-6deg);
   opacity: 0;
@@ -81,13 +81,10 @@
   top: 84px;
   left: 50%;
   width: 246px;
-  height: 380px;
+  height: 400px;
   margin-left: -123px;
   cursor: grab;
-  /* Vertical page scroll still works when a touch starts on the badge; only
-     mouse/pen actually drag it (see NameBadge.tsx), so touch never needs to
-     be swallowed here. */
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   transform-origin: top center;
   transform-style: preserve-3d;
@@ -348,13 +345,13 @@
 .badge-magstripe {
   width: 100%;
   height: 34px;
-  margin-top: 14px;
+  margin-top: 6px;
   background: repeating-linear-gradient(180deg, #0c0e14 0 4px, #1c1f29 4px 8px);
   flex-shrink: 0;
 }
 
 .badge-seal {
-  margin-top: 14px;
+  margin-top: 4px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -369,7 +366,7 @@
 
 .badge-signature {
   width: calc(100% - 32px);
-  margin-top: 14px;
+  margin-top: 4px;
   padding: 8px 10px 6px;
   border-radius: 8px;
   background: var(--bg-primary);
@@ -394,16 +391,16 @@
 
 .badge-back-note {
   width: calc(100% - 36px);
-  margin-top: 12px;
+  margin-top: 2px;
   font-size: 0.6rem;
-  line-height: 1.5;
+  line-height: 1.4;
   color: var(--text-muted);
 }
 
 .badge-back-socials {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 .badge-back-socials span {
   width: 26px;
@@ -417,7 +414,7 @@
   font-size: 0.78rem;
 }
 
-.badge-barcode--back { margin-top: auto; }
+.badge-barcode--back { margin-top: auto; flex-shrink: 0; }
 
 /* Stop paying for GPU/CPU work on animations the user can't see. */
 .badge-wrap--offscreen .badge-card--idle,
@@ -427,15 +424,10 @@
 }
 
 @media (max-width: 640px) {
-  .badge-wrap { width: 230px; height: 440px; }
-  .badge-card { width: 204px; height: 360px; margin-left: -102px; top: 64px; }
+  .badge-wrap { width: 230px; height: 460px; }
+  .badge-card { width: 204px; height: 380px; margin-left: -102px; top: 64px; }
   .badge-photo-frame { width: 82px; height: 96px; }
   .badge-name { font-size: 0.92rem; }
-}
-
-@media (max-width: 900px) {
-  .about { overflow-x: hidden; }
-  .badge-wrap { overflow: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {
