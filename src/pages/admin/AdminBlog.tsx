@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { supabase, uploadToPortfolioBucket } from '../../lib/supabaseClient';
 import type { BlogPost } from '../../types';
+import RichTextEditor from './RichTextEditor';
 
 const EMPTY: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'> = {
   slug: '', title: '', excerpt: '', content: '', cover_image: null, tags: [], is_published: false,
@@ -23,6 +24,14 @@ export default function AdminBlog() {
     setPosts((data as BlogPost[]) || []);
   }
   useEffect(() => { load(); }, []);
+
+  // Existing tags across all posts, used as category suggestions so the
+  // admin can stay consistent instead of typing near-duplicate categories.
+  const tagSuggestions = useMemo(() => {
+    const set = new Set<string>();
+    posts.forEach((p) => p.tags?.forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, [posts]);
 
   function resetForm() {
     setEditingId(null);
@@ -47,6 +56,11 @@ export default function AdminBlog() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMessage(null);
+    const plainContent = (form.content || '').replace(/<[^>]*>/g, '').trim();
+    if (!plainContent) {
+      setMessage('Content cannot be empty.');
+      return;
+    }
     const payload = {
       ...form,
       slug: form.slug || slugify(form.title),
@@ -92,17 +106,29 @@ export default function AdminBlog() {
             <input value={form.slug} onChange={(e) => setForm({ ...form, slug: slugify(e.target.value) })} placeholder="my-first-post" />
           </label>
           <label>
-            Tags (comma separated)
-            <input value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} placeholder="laravel, react" />
+            Categories / tags (comma separated — first one is the featured category)
+            <input
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
+              placeholder="laravel, react"
+              list="tag-suggestions"
+            />
+            <datalist id="tag-suggestions">
+              {tagSuggestions.map((t) => <option key={t} value={t} />)}
+            </datalist>
           </label>
         </div>
         <label>
           Excerpt
-          <textarea rows={2} value={form.excerpt || ''} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
+          <textarea rows={2} value={form.excerpt || ''} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} placeholder="Short teaser shown on the blog list and in search results" />
         </label>
         <label>
-          Content (one paragraph per line)
-          <textarea rows={10} required value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
+          Content
+          <RichTextEditor
+            key={editingId || 'new'}
+            value={form.content}
+            onChange={(html) => setForm((f: any) => ({ ...f, content: html }))}
+          />
         </label>
 
         <div className="admin-photo-row">
