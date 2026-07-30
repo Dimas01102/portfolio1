@@ -1,0 +1,431 @@
+.badge-wrap {
+  position: relative;
+  width: 280px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 480px;
+  perspective: 1300px;
+  transform: translateY(-240px) rotate(-6deg);
+  opacity: 0;
+  transition: transform 1.1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+  will-change: transform;
+}
+.badge-wrap--entered {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+}
+
+/* wall/ceiling mount plate the strap hangs from */
+.badge-mount {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 54px;
+  height: 12px;
+  margin-left: -27px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, var(--text-muted), var(--border));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+}
+.badge-mount::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--text-muted);
+}
+
+.badge-string-svg {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 280px;
+  height: 180px;
+  margin-left: -140px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* flat fabric lanyard strap — solid, worn-around-the-neck look */
+.badge-strap-shadow {
+  stroke: #000;
+  stroke-width: 17;
+  stroke-linecap: round;
+  opacity: 0.18;
+  filter: blur(3px);
+  transform: translate(2px, 3px);
+}
+.badge-strap-base {
+  stroke: var(--accent);
+  stroke-width: 15;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+.badge-strap-highlight {
+  stroke: var(--brass);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.75;
+  transform: translate(-3.5px, 0);
+}
+
+.badge-card {
+  position: absolute;
+  top: 84px;
+  left: 50%;
+  width: 246px;
+  height: 380px;
+  margin-left: -123px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  z-index: 4;
+  will-change: transform;
+}
+.badge-card:active { cursor: grabbing; }
+
+.badge-card--idle {
+  animation: badgeSway 5.5s ease-in-out infinite;
+}
+@keyframes badgeSway {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateZ(-2.2deg) rotateY(-3deg) rotateX(1deg); }
+  50% { transform: translate3d(0, 3px, 0) rotateZ(2.2deg) rotateY(3deg) rotateX(-1deg); }
+}
+
+/* metal swivel clip connecting the strap to the card */
+.badge-clip {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 34px;
+  height: 18px;
+  margin-left: -17px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #e6e9f0, #9aa3b8 55%, #6b7488);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  z-index: 5;
+}
+.badge-clip-ring {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #7a8296;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 6;
+}
+
+.badge-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 22px 46px -14px rgba(0, 0, 0, 0.4), 0 3px 10px rgba(0, 0, 0, 0.14);
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding-bottom: 16px;
+}
+.badge-face--front { transform: rotateY(0deg); }
+.badge-face--back { transform: rotateY(180deg); }
+
+/* corporate-style header strip (shared by both faces) */
+.badge-card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 10px;
+  background: linear-gradient(90deg, var(--accent), var(--brass));
+  color: #fff;
+  flex-shrink: 0;
+}
+.badge-header-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+.badge-header-text {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  flex: 1;
+  text-align: left;
+  opacity: 0.95;
+}
+.badge-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #33d17a;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 6px #33d17a;
+  flex-shrink: 0;
+}
+
+/* holographic shine sweep — the "kilat" glint, front only */
+.badge-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.05) 35%,
+    rgba(255, 255, 255, 0.55) 46%,
+    var(--accent) 50%,
+    rgba(255, 255, 255, 0.55) 54%,
+    rgba(255, 255, 255, 0.05) 65%,
+    transparent 80%
+  );
+  background-size: 260% 260%;
+  background-position: -140% -140%;
+  mix-blend-mode: overlay;
+  animation: badgeShineSweep 4.2s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+@keyframes badgeShineSweep {
+  0% { background-position: -140% -140%; opacity: 0; }
+  8% { opacity: 1; }
+  35% { background-position: 60% 60%; opacity: 1; }
+  46% { opacity: 0; }
+  100% { background-position: 60% 60%; opacity: 0; }
+}
+
+/* little lightning sparks that flicker near the corners, front only */
+.badge-spark {
+  position: absolute;
+  font-size: 0.85rem;
+  line-height: 1;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--brass);
+  filter: drop-shadow(0 0 4px var(--brass));
+}
+.badge-spark--1 { top: 46px; right: 14px; animation: badgeSpark 4.2s ease-in-out infinite; animation-delay: 0.3s; }
+.badge-spark--2 { bottom: 90px; left: 12px; animation: badgeSpark 4.2s ease-in-out infinite; animation-delay: 1.8s; }
+.badge-spark--3 { top: 50%; right: 10px; animation: badgeSpark 4.2s ease-in-out infinite; animation-delay: 3s; }
+@keyframes badgeSpark {
+  0%, 92%, 100% { opacity: 0; transform: scale(0.6) rotate(0deg); }
+  94% { opacity: 1; transform: scale(1.15) rotate(-8deg); }
+  96% { opacity: 0.3; transform: scale(0.9) rotate(4deg); }
+  98% { opacity: 1; transform: scale(1.05) rotate(-4deg); }
+}
+
+/* rectangular framed ID photo, like a real employee badge */
+.badge-photo-frame {
+  width: 96px;
+  height: 112px;
+  margin-top: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 3px solid var(--accent-soft);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  flex-shrink: 0;
+}
+.badge-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.badge-initials {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.badge-name {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--text-primary);
+  line-height: 1.25;
+  padding: 0 14px;
+}
+.badge-role-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge-id-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px 0;
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+}
+.badge-id-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #33d17a;
+}
+
+/* simulated barcode, like a real staff badge */
+.badge-barcode {
+  width: calc(100% - 32px);
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.badge-barcode-bars {
+  width: 100%;
+  height: 24px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--text-primary) 0px,
+    var(--text-primary) 2px,
+    transparent 2px,
+    transparent 4px,
+    var(--text-primary) 4px,
+    var(--text-primary) 5px,
+    transparent 5px,
+    transparent 9px,
+    var(--text-primary) 9px,
+    var(--text-primary) 12px,
+    transparent 12px,
+    transparent 14px
+  );
+  opacity: 0.85;
+}
+.badge-barcode-num {
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* ---------------- BACK FACE content ---------------- */
+.badge-card-header--back { background: linear-gradient(90deg, #2a3040, #454d63); }
+
+.badge-magstripe {
+  width: 100%;
+  height: 34px;
+  margin-top: 14px;
+  background: repeating-linear-gradient(180deg, #0c0e14 0 4px, #1c1f29 4px 8px);
+  flex-shrink: 0;
+}
+
+.badge-seal {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px dashed var(--brass);
+  color: var(--brass);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.badge-signature {
+  width: calc(100% - 32px);
+  margin-top: 14px;
+  padding: 8px 10px 6px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+}
+.badge-signature-label {
+  display: block;
+  font-size: 0.56rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.badge-signature-line {
+  display: block;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+}
+
+.badge-back-note {
+  width: calc(100% - 36px);
+  margin-top: 12px;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.badge-back-socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.badge-back-socials span {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+}
+
+.badge-barcode--back { margin-top: auto; }
+
+@media (max-width: 640px) {
+  .badge-wrap { width: 230px; height: 440px; }
+  .badge-card { width: 204px; height: 360px; margin-left: -102px; top: 64px; }
+  .badge-photo-frame { width: 82px; height: 96px; }
+  .badge-name { font-size: 0.92rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-wrap { transition: none; }
+  .badge-card--idle { animation: none; }
+  .badge-shine { animation: none; opacity: 0; }
+  .badge-spark { animation: none; opacity: 0; }
+}

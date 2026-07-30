@@ -1,8 +1,4 @@
-/* ============================================================
-   THEME TOKENS
-   Professional palette: deep navy base, single indigo accent for
-   action/links, warm brass accent reserved for emphasis & badges.
-   ============================================================ */
+/* ROOT */
 :root {
   --bg-primary: #f7f8fb;
   --bg-secondary: #ffffff;
@@ -63,6 +59,7 @@ body {
     background 0.3s ease,
     color 0.3s ease;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* safety net: lets the About badge swing/escape its section without ever causing a page-wide horizontal scrollbar */
 }
 
 a {
@@ -242,7 +239,7 @@ img {
    CURSOR-FOLLOW CARD GLOW
    Applied via .card-glow; a single delegated mousemove listener
    (see App.tsx) updates --mx/--my per element for a soft light
-   that tracks the pointer — cheap, no per-card listeners.
+   that tracks the pointer cheap, no per-card listeners.
    ============================================================ */
 .card-glow {
   position: relative;

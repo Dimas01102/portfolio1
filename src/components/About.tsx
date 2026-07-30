@@ -1,5 +1,6 @@
 import type { Profile } from '../types';
 import Reveal from './Reveal';
+import NameBadge from './NameBadge';
 import './About.css';
 
 const HIGHLIGHTS = [
@@ -21,28 +22,38 @@ export default function About({ profile }: { profile: Profile | null }) {
         </Reveal>
 
         <div className="about__grid">
-          <Reveal className="about__body" delay={80}>
-            {(profile?.about || 'About content goes here.')
-              .split('\n')
-              .filter(Boolean)
-              .map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
+          <div className="about__top">
+            <Reveal className="about__body" delay={80}>
+              {(profile?.about || 'About content goes here.')
+                .split('\n')
+                .filter(Boolean)
+                .map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
 
-            {profile?.location || profile?.email || profile?.github_username ? (
-              <div className="about__meta">
-                {profile?.location && (
-                  <span className="about__meta-item"><i className="bi bi-geo-alt" /> {profile.location}</span>
-                )}
-                {profile?.email && (
-                  <span className="about__meta-item"><i className="bi bi-envelope" /> {profile.email}</span>
-                )}
-                {profile?.github_username && (
-                  <span className="about__meta-item"><i className="bi bi-github" /> @{profile.github_username}</span>
-                )}
-              </div>
-            ) : null}
-          </Reveal>
+              {profile?.location || profile?.email || profile?.github_username ? (
+                <div className="about__meta">
+                  {profile?.location && (
+                    <span className="about__meta-item"><i className="bi bi-geo-alt" /> {profile.location}</span>
+                  )}
+                  {profile?.email && (
+                    <span className="about__meta-item"><i className="bi bi-envelope" /> {profile.email}</span>
+                  )}
+                  {profile?.github_username && (
+                    <span className="about__meta-item"><i className="bi bi-github" /> @{profile.github_username}</span>
+                  )}
+                </div>
+              ) : null}
+            </Reveal>
+
+            <Reveal delay={160} className="about__badge-col">
+              <NameBadge
+                photoUrl={profile?.photo_url}
+                name={profile?.full_name || 'Your Name'}
+                role={profile?.role_titles?.[0] || 'Fullstack Developer'}
+              />
+            </Reveal>
+          </div>
 
           <div className="about__flow">
             {HIGHLIGHTS.flatMap((h, i) => {

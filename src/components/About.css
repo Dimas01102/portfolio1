@@ -1,4 +1,4 @@
-.about { position: relative; overflow: hidden; }
+.about { position: relative; overflow: visible; z-index: 2; }
 .about__blob {
   position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.35; pointer-events: none; z-index: 0;
   animation: aboutDrift 14s ease-in-out infinite;
@@ -11,6 +11,19 @@
 }
 
 .about__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 52px; }
+
+.about__top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 36px;
+}
+.about__badge-col {
+  display: flex;
+  justify-content: center;
+  margin-top: -20px; /* nudges the card up so it lines up with the top of the paragraph/heading instead of sitting visibly lower */
+}
+
 .about__body { color: var(--text-secondary); line-height: 1.85; font-size: 1.03rem; max-width: 720px; }
 .about__body p { margin-bottom: 16px; }
 
@@ -22,10 +35,6 @@
 }
 .about__meta-item i { color: var(--accent); }
 
-/* ============================================================
-   FLOW: highlight cards connected end-to-end by an animated
-   "data flowing" connector line, like a little pipeline.
-   ============================================================ */
 .about__flow { display: flex; align-items: stretch; }
 .about__flow-node-wrap { flex: 1; min-width: 0; }
 .about__flow-node {
@@ -49,17 +58,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* clips the sliding dash track below */
 }
 .about__connector::before {
   content: '';
-  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%; /* double-length repeating pattern so the loop point is invisible */
   height: 2px;
+  margin-top: -1px;
   background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 14px);
   background-size: 28px 2px;
   opacity: 0.55;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
   animation: flowSlide 0.9s linear infinite;
 }
-@keyframes flowSlide { to { background-position: -28px 0; } }
+@keyframes flowSlide { to { transform: translate3d(-28px, 0, 0); } }
 .about__connector-pulse {
   position: absolute;
   top: 50%; left: 0;
@@ -68,17 +84,25 @@
   border-radius: 50%;
   background: var(--brass);
   box-shadow: 0 0 8px var(--brass);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
   animation: pulseMove 2.4s linear infinite;
 }
 @keyframes pulseMove {
-  0% { left: 0; opacity: 0; }
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
-  100% { left: calc(100% - 6px); opacity: 0; }
+  100% { transform: translate3d(calc(100% - 6px), 0, 0); opacity: 0; }
 }
 
 @media (max-width: 860px) {
   .about__flow { flex-direction: column; }
   .about__connector { display: none; }
   .about__flow-node-wrap { margin-bottom: 14px; }
+}
+
+@media (max-width: 720px) {
+  .about__top { grid-template-columns: 1fr; gap: 8px; }
+  .about__badge-col { order: -1; margin-top: 0; margin-bottom: 8px; }
+  .about__body { max-width: 100%; }
 }
