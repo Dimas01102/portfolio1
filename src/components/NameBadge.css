@@ -84,7 +84,10 @@
   height: 380px;
   margin-left: -123px;
   cursor: grab;
-  touch-action: none;
+  /* Vertical page scroll still works when a touch starts on the badge; only
+     mouse/pen actually drag it (see NameBadge.tsx), so touch never needs to
+     be swallowed here. */
+  touch-action: pan-y;
   user-select: none;
   transform-origin: top center;
   transform-style: preserve-3d;
@@ -416,11 +419,23 @@
 
 .badge-barcode--back { margin-top: auto; }
 
+/* Stop paying for GPU/CPU work on animations the user can't see. */
+.badge-wrap--offscreen .badge-card--idle,
+.badge-wrap--offscreen .badge-shine,
+.badge-wrap--offscreen .badge-spark {
+  animation-play-state: paused;
+}
+
 @media (max-width: 640px) {
   .badge-wrap { width: 230px; height: 440px; }
   .badge-card { width: 204px; height: 360px; margin-left: -102px; top: 64px; }
   .badge-photo-frame { width: 82px; height: 96px; }
   .badge-name { font-size: 0.92rem; }
+}
+
+@media (max-width: 900px) {
+  .about { overflow-x: hidden; }
+  .badge-wrap { overflow: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {

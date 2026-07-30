@@ -49,6 +49,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -59,7 +61,14 @@ body {
     background 0.3s ease,
     color 0.3s ease;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* safety net: lets the About badge swing/escape its section without ever causing a page-wide horizontal scrollbar */
+  overflow-x: hidden; /* safety net: keeps any transformed/dragged element (e.g. the 3D badge) from ever causing a page-wide horizontal scrollbar */
+  width: 100%;
+  position: relative;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 a {
