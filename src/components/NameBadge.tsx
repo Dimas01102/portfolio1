@@ -32,10 +32,6 @@ export default function NameBadge({ photoUrl, name, role }: NameBadgeProps) {
 
   const ANCHOR_Y = -6; // px, top attachment point relative to wrap
   const REST_DROP = 84; // px, string length at rest (matches card's CSS top)
-  // No distance/velocity limit here on purpose — the badge is free to fly as far
-  // as a drag/flick sends it, just like the original. Page-wide horizontal scroll
-  // is instead hard-blocked globally via overflow-x: hidden on html/body/#root
-  // (see index.css), so letting the badge itself travel unrestricted is safe.
 
   const clampRadial = (x: number, y: number) => ({ x, y });
 

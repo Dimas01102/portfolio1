@@ -6,7 +6,7 @@ import './GithubStats.css';
 
 const DAY_LABELS = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
 const LEVEL_COLORS = ['var(--gh-l0)', 'var(--gh-l1)', 'var(--gh-l2)', 'var(--gh-l3)', 'var(--gh-l4)'];
-const CELL_PITCH = 14; // 11px cell + 3px gap, keep in sync with GithubStats.css
+const CELL_PITCH = 14; 
 const SNAKE_LEN = 7;
 const TICK_MS = 130;
 
@@ -37,7 +37,6 @@ export default function GithubStats({ username }: { username: string }) {
     };
   }, [username]);
 
-  // group days into weeks (columns), Sunday-first, like GitHub's own graph
   const weeks = useMemo(() => {
     if (!days.length) return [];
     const cols: ContributionDay[][] = [];
