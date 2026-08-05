@@ -1,35 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
-import './ChatBot.css';
+import { useEffect, useRef, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
+import "./ChatBot.css";
 
 interface Msg {
-  role: 'user' | 'model';
+  role: "user" | "model";
   text: string;
 }
 
 const GREETING: Msg = {
-  role: 'model',
-  text: 'Hai, aku Dimdim 👋 Tanya apa aja soal Dimas, mulai dari skill, proyek, sertifikat, sampai cara menghubunginya.',
+  role: "model",
+  text: "Hai, aku Dimdim 👋 Tanya apa aja soal Dimas, mulai dari skill, proyek, sertifikat, sampai cara menghubunginya.",
 };
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([GREETING]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, loading]);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 250);
   }, [open]);
 
-  async function invokeChat(payload: { message: string; history: { role: string; text: string }[] }) {
-    return supabase.functions.invoke('chat-assistant', { body: payload });
+  async function invokeChat(payload: {
+    message: string;
+    history: { role: string; text: string }[];
+  }) {
+    return supabase.functions.invoke("chat-assistant", { body: payload });
   }
 
   async function send(text: string) {
@@ -40,8 +43,8 @@ export default function ChatBot() {
       .filter((m) => m !== GREETING)
       .map((m) => ({ role: m.role, text: m.text }));
 
-    setMessages((m) => [...m, { role: 'user', text: trimmed }]);
-    setInput('');
+    setMessages((m) => [...m, { role: "user", text: trimmed }]);
+    setInput("");
     setLoading(true);
 
     const payload = { message: trimmed, history };
@@ -53,11 +56,20 @@ export default function ChatBot() {
         ({ data, error } = await invokeChat(payload));
         if (error) throw error;
       }
-      setMessages((m) => [...m, { role: 'model', text: data?.reply || 'Maaf, aku belum bisa jawab sekarang.' }]);
+      setMessages((m) => [
+        ...m,
+        {
+          role: "model",
+          text: data?.reply || "Maaf, aku belum bisa jawab sekarang.",
+        },
+      ]);
     } catch {
       setMessages((m) => [
         ...m,
-        { role: 'model', text: 'Lagi ada gangguan koneksi nih, coba lagi sebentar ya.' },
+        {
+          role: "model",
+          text: "Lagi ada gangguan koneksi nih, coba lagi sebentar ya.",
+        },
       ]);
     } finally {
       setLoading(false);
@@ -67,28 +79,39 @@ export default function ChatBot() {
   return (
     <>
       <button
-        className={`chatbot__fab ${open ? 'chatbot__fab--open' : ''}`}
+        className={`chatbot__fab ${open ? "chatbot__fab--open" : ""}`}
         onClick={() => setOpen((o) => !o)}
-        aria-label={open ? 'Tutup chat' : 'Chat dengan Dimdim'}
+        aria-label={open ? "Tutup chat" : "Chat dengan Dimdim"}
       >
-        <i className={`bi ${open ? 'bi-x-lg' : 'bi-chat-dots-fill'}`} />
+        <i className={`bi ${open ? "bi-x-lg" : "bi-chat-dots-fill"}`} />
         {!open && <span className="chatbot__fab-pulse" aria-hidden="true" />}
       </button>
 
-      <div className={`chatbot__panel ${open ? 'chatbot__panel--open' : ''}`} role="dialog" aria-label="Chat dengan Dimdim">
+      <div
+        className={`chatbot__panel ${open ? "chatbot__panel--open" : ""}`}
+        role="dialog"
+        aria-label="Chat dengan Dimdim"
+      >
         <div className="chatbot__header">
-          <span className="chatbot__avatar">🤖</span>
-          <div>
-            <p className="chatbot__title">Dimdim</p>
-            <p className="chatbot__subtitle">
-              <span className="chatbot__dot" /> Asisten portofolio
-            </p>
+          <div className="chatbot__header-info">
+            <span className="chatbot__avatar">
+              <i className="bi bi-robot" />
+            </span>
+            <div>
+              <p className="chatbot__title">Dimdim</p>
+              <p className="chatbot__subtitle">
+                <span className="chatbot__dot" /> Asisten portofolio
+              </p>
+            </div>
           </div>
         </div>
 
         <div className="chatbot__messages">
           {messages.map((m, i) => (
-            <div key={i} className={`chatbot__bubble chatbot__bubble--${m.role}`}>
+            <div
+              key={i}
+              className={`chatbot__bubble chatbot__bubble--${m.role}`}
+            >
               {m.text}
             </div>
           ))}
@@ -117,7 +140,11 @@ export default function ChatBot() {
             disabled={loading}
             maxLength={500}
           />
-          <button type="submit" disabled={loading || !input.trim()} aria-label="Kirim pesan">
+          <button
+            type="submit"
+            disabled={loading || !input.trim()}
+            aria-label="Kirim pesan"
+          >
             <i className="bi bi-send-fill" />
           </button>
         </form>

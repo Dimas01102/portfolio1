@@ -4,12 +4,21 @@ import type { Project } from '../types';
 import Reveal from '../components/Reveal';
 import ProjectModal from '../components/ProjectModal';
 import Skeleton from '../components/Skeleton';
+import Pagination from '../components/Pagination';
+import usePagination from '../hooks/usePagination';
 import './Projects.css';
+
+const PROJECTS_PER_PAGE = 8;
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Project | null>(null);
+
+  const { page, totalPages, pageItems, setPage } = usePagination({
+    items: projects,
+    perPage: PROJECTS_PER_PAGE,
+  });
 
   useEffect(() => {
     supabase
@@ -23,7 +32,7 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <section className="section projects-page">
+    <section id="projects-page" className="section projects-page">
       <div className="container">
         <Reveal>
           <p className="eyebrow">Portfolio</p>
@@ -53,7 +62,7 @@ export default function ProjectsPage() {
         )}
 
         <div className="projects-grid">
-          {projects.map((p, i) => (
+          {pageItems.map((p, i) => (
             <Reveal key={p.id} delay={i * 70}>
               <article
                 className="card card-glow projects-card"
@@ -97,6 +106,13 @@ export default function ProjectsPage() {
             </Reveal>
           ))}
         </div>
+
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          scrollTargetId="projects-page"
+        />
       </div>
 
       {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}

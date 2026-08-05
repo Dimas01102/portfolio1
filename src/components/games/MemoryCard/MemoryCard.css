@@ -5,7 +5,9 @@
   perspective: 800px;
 }
 @media (max-width: 480px) {
-  .memory-board { grid-template-columns: repeat(2, 1fr); }
+  .memory-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .memory-card {
   position: relative;
@@ -15,8 +17,12 @@
   transform-style: preserve-3d;
   transition: transform 0.45s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
-.memory-card.is-flipped { transform: rotateY(180deg); }
-.memory-card.is-matched { opacity: 0.55; }
+.memory-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.memory-card.is-matched {
+  opacity: 0.55;
+}
 .memory-card__face {
   position: absolute;
   inset: 0;

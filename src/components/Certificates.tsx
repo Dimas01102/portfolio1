@@ -2,10 +2,19 @@ import { useState } from 'react';
 import type { Certificate } from '../types';
 import Reveal from './Reveal';
 import Lightbox from './Lightbox';
+import Pagination from './Pagination';
+import usePagination from '../hooks/usePagination';
 import './Certificates.css';
+
+const CERTIFICATES_PER_PAGE = 8;
 
 export default function Certificates({ certificates }: { certificates: Certificate[] }) {
   const [preview, setPreview] = useState<Certificate | null>(null);
+
+  const { page, totalPages, pageItems, setPage } = usePagination({
+    items: certificates,
+    perPage: CERTIFICATES_PER_PAGE,
+  });
 
   return (
     <section id="certificates" className="section certificates">
@@ -16,7 +25,7 @@ export default function Certificates({ certificates }: { certificates: Certifica
         </Reveal>
 
         <div className="certificates__grid">
-          {certificates.map((c, i) => (
+          {pageItems.map((c, i) => (
             <Reveal key={c.id} delay={i * 60}>
               <div className="certificates__card card card-glow">
                 {c.image_url && (
@@ -52,6 +61,13 @@ export default function Certificates({ certificates }: { certificates: Certifica
             <p className="section-desc">Certificates will appear here once added from the admin panel.</p>
           )}
         </div>
+
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          scrollTargetId="certificates"
+        />
       </div>
 
       {preview?.image_url && (

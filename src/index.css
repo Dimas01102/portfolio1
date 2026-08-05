@@ -61,7 +61,7 @@ body {
     background 0.3s ease,
     color 0.3s ease;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* safety net: keeps any transformed/dragged element (e.g. the 3D badge) from ever causing a page-wide horizontal scrollbar */
+  overflow-x: hidden;
   width: 100%;
   position: relative;
 }
@@ -110,6 +110,12 @@ img {
 @media (max-width: 768px) {
   .section {
     padding: 72px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 18px;
   }
 }
 
@@ -228,9 +234,9 @@ img {
   }
 }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/* 
+  SCROLL REVEAL
+*/
 .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -290,9 +296,9 @@ img {
   opacity: 0.7;
 }
 
-/* ============================================================
-   MARQUEE (crossed ribbons)
-   ============================================================ */
+/* 
+  MARQUEE (crossed ribbons) 
+*/
 .marquee-section {
   position: relative;
   height: 240px; /* Ruang untuk efek pita menyilang */
@@ -339,7 +345,7 @@ img {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.05),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9); /* Refleksi cahaya atas */
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
 
   /* Posisi Menyilang 1 */
   transform: translateY(-50%) rotate(-4deg);
@@ -353,7 +359,6 @@ img {
 
 .marquee-strip--b {
   transform: translateY(-50%) rotate(4deg);
-  /* Transparansi dinaikkan (0.45) agar pita kedua juga terlihat */
   background: rgba(255, 255, 255, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
@@ -363,7 +368,6 @@ img {
 .marquee-strip:hover {
   z-index: 10;
   transform: translateY(-50%) rotate(0deg) scale(1.02);
-  /* Saat disentuh, warnanya menjadi hampir putih solid namun tetap glossy */
   background: rgba(255, 255, 255, 0.85);
   border-top-color: rgba(255, 255, 255, 1);
   box-shadow:

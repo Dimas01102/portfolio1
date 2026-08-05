@@ -1,6 +1,7 @@
 import type { Profile } from '../types';
 import Reveal from './Reveal';
 import NameBadge from './NameBadge';
+import EducationTimeline from './EducationTimeline';
 import './About.css';
 
 const HIGHLIGHTS = [
@@ -49,7 +50,7 @@ export default function About({ profile }: { profile: Profile | null }) {
             <Reveal delay={160} className="about__badge-col">
               <NameBadge
                 photoUrl={profile?.photo_url}
-                name={profile?.full_name || 'Your Name'}
+                name={profile?.full_name || 'Dimas Dwi Prasetiyo'}
                 role={profile?.role_titles?.[0] || 'Fullstack Developer'}
               />
             </Reveal>
@@ -75,6 +76,8 @@ export default function About({ profile }: { profile: Profile | null }) {
               return [node, connector];
             })}
           </div>
+
+          <EducationTimeline />
         </div>
       </div>
     </section>

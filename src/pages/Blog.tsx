@@ -3,9 +3,13 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { readingTime } from '../lib/text';
 import type { BlogPost } from '../types';
+import Pagination from '../components/Pagination';
+import usePagination from '../hooks/usePagination';
 import Reveal from '../components/Reveal';
 import Skeleton from '../components/Skeleton';
 import './Blog.css';
+
+const BLOG_PER_PAGE = 8;
 
 const BlogCard = memo(function BlogCard({ post, delay }: { post: BlogPost; delay: number }) {
   return (
@@ -61,8 +65,6 @@ export default function Blog() {
     return () => { active = false; };
   }, []);
 
-  // All categories are derived from post tags (first tag = featured category
-  // shown on the card badge). Computed once per posts change, not per render.
   const categories = useMemo(() => {
     const set = new Set<string>();
     posts.forEach((p) => p.tags?.forEach((t) => set.add(t)));
@@ -80,6 +82,12 @@ export default function Blog() {
     });
   }, [posts, query, activeCategory]);
 
+  // Hook pagination menggunakan data hasil filter
+  const { page, totalPages, pageItems, setPage } = usePagination({
+    items: filteredPosts,
+    perPage: BLOG_PER_PAGE,
+  });
+
   function updateParam(key: string, value: string) {
     const next = new URLSearchParams(searchParams);
     if (value) next.set(key, value);
@@ -94,7 +102,7 @@ export default function Blog() {
   const hasFilters = !!query || !!activeCategory;
 
   return (
-    <section className="section blog-page">
+    <section id="blog" className="section blog-page">
       <div className="container">
         <Reveal>
           <p className="eyebrow">Writing</p>
@@ -176,10 +184,19 @@ export default function Blog() {
         )}
 
         <div className="blog-grid">
-          {filteredPosts.map((post, i) => (
+          {pageItems.map((post, i) => (
             <BlogCard key={post.id} post={post} delay={i * 60} />
           ))}
         </div>
+
+        {!loading && filteredPosts.length > 0 && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            scrollTargetId="blog"
+          />
+        )}
       </div>
     </section>
   );
