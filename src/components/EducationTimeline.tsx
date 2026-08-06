@@ -15,21 +15,21 @@ interface EducationItem {
 const EDUCATION: EducationItem[] = [
   {
     level: 'SD',
-    institution: 'SDS AL-AZHAR BATAM',
+    institution: 'AL-AZHAR BATAM ELEMENTARY SCHOOL',
     period: '2013 - 2019',
     description: 'The beginning of the learning journey fosters curiosity and lays the academic foundations.',
     icon: 'bi-pencil-fill',
   },
   {
     level: 'SMP',
-    institution: 'SMPN 41 BATAM',
+    institution: 'BATAM 41 JUNIOR HIGH SCHOOL',
     period: '2019 - 2022',
     description: 'First encountering computers and basic logic planted the seeds of an interest in technology.',
     icon: 'bi-journal-bookmark-fill',
   },
   {
     level: 'SMA / SMK',
-    institution: 'SMKN 4 BATAM',
+    institution: 'STATE VOCATIONAL HIGH SCHOOL 4 BATAM',
     major: 'Software Engineering (RPL)',
     period: '2022 - 2025',
     description: 'Developing interest in computer science and learning programming independently started.',
@@ -37,9 +37,9 @@ const EDUCATION: EducationItem[] = [
   },
   {
     level: 'Kuliah',
-    institution: 'POLITEKNIK NEGERI BATAM',
+    institution: 'BATAM STATE POLYTECHNIC',
     major: 'Software Engineering (TRPL)', 
-    period: '2025 - Sekarang',
+    period: '2025 - Now',
     description: 'Technology in software engineering - focus on web fullstack.',
     icon: 'bi-mortarboard-fill',
     current: true,
